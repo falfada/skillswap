@@ -1,5 +1,7 @@
-// const mongoose = require('mongoose');
+const { connect, connection } = require('mongoose');
 
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mern-shopping');
+const connectionString = 'mongodb+srv://wilson:skills@skillswap.b8eirkl.mongodb.net/'
 
-// module.exports = mongoose.connection;
+connect(connectionString);
+
+module.exports = connection;
