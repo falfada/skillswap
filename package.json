@@ -1,0 +1,19 @@
+{
+  "name": "skillswap",
+  "version": "1.0.0",
+  "description": "## Description",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js",
+    "install": "cd server && npm i && cd .. / Client && npm i",
+    "dev": "concurrently \"cd server && npm run watch\" \"cd Client && npm run dev\"" 
+},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  }
+}
