@@ -55,5 +55,4 @@ function SideBar() {
     </section>
   );
 }
-
 export default SideBar;
