@@ -3,6 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
+import { MdOutlineConnectWithoutContact } from "react-icons/md";
 import { CiCalendar } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { CiSettings } from "react-icons/ci";
@@ -10,7 +11,8 @@ import { CiSettings } from "react-icons/ci";
 function SideBar() {
   const menus = [
     { name: "Home", icon: FaHome, link: "/" },
-    { name: "Match", icon: IoChatboxEllipsesOutline, link: "/Match" },
+    { name: "Match", icon: MdOutlineConnectWithoutContact, link: "/Match" },
+    {name: "chat", icon:IoChatboxEllipsesOutline, link: "/Chat"},
     { name: "Calendar", icon: CiCalendar, link: "/Calendar" },
     { name: "User", icon: CiUser, link: "/User" },
     { name: "Settings", icon: CiSettings, link: "/Settings" },
@@ -19,7 +21,7 @@ function SideBar() {
   return (
     <section className="flex gap-6">
       <div
-        className={`bg-[#0e0e0e] min-h-screen ${
+        className={`bg-[#0e0e0e]  ${
           open ? "w-72" : "w-16"
         } duration-500 text-gray-100 px-4`}
       >
@@ -53,5 +55,4 @@ function SideBar() {
     </section>
   );
 }
-
 export default SideBar;

@@ -2,7 +2,11 @@ import React from 'react'
 
  function Match() {
   return (
-    <div>Match</div>
+    <div className=''>
+        <div className=''>
+            card
+        </div>
+    </div>
   )
 }
 export default Match
