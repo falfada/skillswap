@@ -8,22 +8,32 @@ function UserHomepage() {
     {
       name: "Richard Hendricks",
       url: "./img/richard.jpg",
+      skill:"carpintero",
+      description: "soy carpintero"
     },
     {
       name: "Erlich Bachman",
       url: "./img/erlich.jpg",
+      skill:"carpintero",
+      description: "soy carpintero"
     },
     {
       name: "Monica Hall",
       url: "./img/monica.jpg",
+            skill:"carpintero",
+      description: "soy carpintero"
     },
     {
       name: "Jared Dunn",
       url: "./img/jared.jpg",
+            skill:"carpintero",
+      description: "soy carpintero"
     },
     {
       name: "Dinesh Chugtai",
       url: "./img/dinesh.jpg",
+            skill:"carpintero",
+      description: "soy carpintero"
     },
   ];
 
@@ -39,8 +49,9 @@ function UserHomepage() {
   };
 
   return (
-    <div className="flex justify-between">
-      <div className="flex flex-col justify-center h-screen w-7/10">
+
+    <div className="flex justify-center m-auto ">
+      <div className="flex flex-col justify-center min-h-screen w-7/10">
         <div className="cardContainer">
           <link
             href="https://fonts.googleapis.com/css?family=Damion&display=swap"
@@ -62,7 +73,10 @@ function UserHomepage() {
                   style={{ backgroundImage: "url(" + character.url + ")" }}
                   className="card"
                 >
+                  <div className="absolute top-3/4 p-8 bg-slate-100 w-full">
                   <h3>{character.name}</h3>
+                  <p>{character.skill}</p>
+                  </div>
                 </div>
               </TinderCard>
             ))}

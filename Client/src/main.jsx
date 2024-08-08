@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import UserHomepage from './Components/UserHomepage/UserHomepage.jsx';
+import Match from './Components/Match/Match.jsx';
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <UserHomepage />,
+      },
+      {
+        path: "/Match",
+        element: <Match />,
       },
     ],
   },

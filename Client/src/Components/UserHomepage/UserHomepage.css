@@ -5,7 +5,8 @@
 .cardContainer {
     width: 400px;
     height: 650px;
-  }
+    display: flex;
+ }
   
   .card {
     background-color: #fff;
@@ -13,9 +14,10 @@
     height: 650px;
     box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
     border-radius: 30px;
-    background-size: cover;
+    /* background-size: cover; */
     background-position: center;
-  }
+    background-color: orange;
+}
   
   .cardContent {
     width: 100%;
