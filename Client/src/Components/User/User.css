@@ -1,0 +1,11 @@
+.container{
+    display: flex;
+    justify-content: center;
+}
+input{
+    padding: 15PX 30px;
+    margin: 10px 0;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 2px solid rgb(219, 219, 219);
+}

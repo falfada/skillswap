@@ -5,6 +5,8 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import UserHomepage from './Components/UserHomepage/UserHomepage.jsx';
 import Match from './Components/Match/Match.jsx';
+import Chat from "./Components/Chat/Chat.jsx"
+import User from './Components/User/User.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
       {
         path: "/Match",
         element: <Match />,
+      },
+      {
+        path: "/Chat",
+        element: <Chat />,
+      },
+      {
+        path: "/User",
+        element: <User />,
       },
     ],
   },

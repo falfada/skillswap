@@ -7,6 +7,7 @@ import { MdOutlineConnectWithoutContact } from "react-icons/md";
 import { CiCalendar } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { CiSettings } from "react-icons/ci";
+import { SlLogout } from "react-icons/sl";
 
 function SideBar() {
   const menus = [
@@ -50,6 +51,24 @@ function SideBar() {
               </h2>
             </Link>
           ))}
+        </div>
+        <div >
+        <Link
+              to="/logout"
+              className="flex items-center text-sm 
+            font-medium p-2 hover:bg-gray-800 rounded-md"
+            >
+              <div >
+              <SlLogout className="whitespace-pre duration-500 text-red-600"/>
+              </div>
+              <h2
+                className={`whitespace-pre duration-500 text-red-600 ${
+                  !open && "opacity-0 translate-x-28 overflow-hidden"
+                }`}
+              >
+                Log Out
+              </h2>
+            </Link>
         </div>
       </div>
     </section>
