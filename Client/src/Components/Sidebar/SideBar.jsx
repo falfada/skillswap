@@ -51,6 +51,11 @@ function SideBar() {
             </Link>
           ))}
         </div>
+        <div>
+          <Link 
+          to="/logout" 
+          className="text-sm text-gray-400 hover:text-gray-200" />
+        </div>
       </div>
     </section>
   );
