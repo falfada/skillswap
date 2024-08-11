@@ -2,7 +2,7 @@ import React from 'react';
 import { TEInput, TERipple } from 'tw-elements-react';
 import Nav from '../components/Nav';
 
-export default function SignUpPage(): JSX.Element {
+export default function SignUpPage() {
   return (
     <section className="h-full bg-neutral-200 dark:bg-neutral-700">
       <Nav />
