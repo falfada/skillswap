@@ -1,20 +1,18 @@
 {
-<<<<<<< HEAD
     "name": "skillswap",
     "version": "1.0.0",
     "description": "## Description",
     "main": "index.js",
     "scripts": {
-        "test": "jest --testPathIgnorePatterns=../Client",
-        "start": "nodemon server/server.js",
-        "install": "cd server && npm i && cd ../Client && npm i",
-        "dev": "concurrently \"cd server && npm run watch\" \"cd Client && npm run dev\""
+        "start": "node server.js",
+        "watch": "nodemon"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "@apollo/server": "^4.10.5",
-        "concurrently": "^8.2.2",
+        "apollo-server-express": "^3.13.0",
+        "bcrypt": "^5.1.1",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
         "express": "^4.19.2",
@@ -30,26 +28,4 @@
         "jest": "^29.7.0",
         "supertest": "^7.0.0"
     }
-=======
-  "dependencies": {
-    "@apollo/server": "^4.10.5",
-    "bcrypt": "^5.1.1",
-    "express": "^4.19.2",
-    "graphql": "^16.9.0",
-    "mongodb": "^6.8.0",
-    "mongoose": "^8.5.2",
-    "node": "^20.16.0"
-  },
-  "name": "server",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "watch": "nodemon server.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
->>>>>>> 9a5fbd2510036f83fecde266ad5b82db7b7e58ff
 }
