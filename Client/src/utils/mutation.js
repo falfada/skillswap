@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 // Mutation to log in a user
 export const LOGIN_USER = gql`
@@ -28,10 +28,10 @@ export const ADD_USER = gql`
 
 // Mutation to update user information
 export const UPDATE_USER = gql`
-  mutation updateUser($name: String!, $email: String!) {
-    updateUser(name: $name, email: $email) {
+  mutation updateUser($name: String!, $email: String!, $password: String!) {
+    updateUser(name: $name, email: $email, password: $password) {
       _id
-      username
+      name
       email
     }
   }
@@ -39,17 +39,14 @@ export const UPDATE_USER = gql`
 
 // Mutation to add a new skill
 export const ADD_SKILL = gql`
-  mutation addSkill($name: String!, $description: String!, $level: String!, $image: String, $link: String) {
-    addSkill(name: $name, description: $description, level: $level, image: $image, link: $link) {
-      skillId
-      name
-      description
-      level
-      image
-      link
-      user {
+  mutation addSkill($userId: ID!, $skill: SkillInput!) {
+    addSkill(userId: $userId, skill: $skill) {
+      _id
+      email
+      skills {
         _id
-        username
+        skill
+        category
       }
     }
   }
@@ -57,39 +54,52 @@ export const ADD_SKILL = gql`
 
 // Mutation to remove a skill
 export const REMOVE_SKILL = gql`
-  mutation removeSkill($skillId: String!) {
-    removeSkill(skillId: $skillId) {
-      skillId
-      name
-      description
-      level
-      image
-      link
+  mutation removeSkill($userId: ID!, $skillId: ID!) {
+    removeSkill(userId: $userId, skillId: $skillId) {
+      _id
+      email
+      skills {
+        _id
+        category
+        skill
+      }
     }
   }
 `;
 
 // Mutation to send a message
 export const SEND_MESSAGE = gql`
-  mutation sendMessage($content: String!, $recipientId: ID!) {
-    sendMessage(content: $content, recipientId: $recipientId) {
+  mutation sendMessage($receiverId: ID!, $content: String!) {
+    sendMessage(receiverId: $receiverId, content: $content) {
       _id
       content
       sender {
-        username
+        email
       }
-      recipient {
-        username
+      receiver {
+        email
       }
-      createdAt
+      timestamp
     }
   }
 `;
 
 // Mutation to add a calendar event (if storing events in DB)
 export const ADD_CALENDAR_EVENT = gql`
-  mutation addCalendarEvent($title: String!, $description: String, $startTime: String!, $endTime: String!, $location: String) {
-    addCalendarEvent(title: $title, description: $description, startTime: $startTime, endTime: $endTime, location: $location) {
+  mutation addCalendarEvent(
+    $title: String!
+    $description: String
+    $startTime: String!
+    $endTime: String!
+    $location: String
+  ) {
+    addCalendarEvent(
+      title: $title
+      description: $description
+      startTime: $startTime
+      endTime: $endTime
+      location: $location
+    ) {
       _id
       title
       description
