@@ -1,37 +1,35 @@
-//placeholder
 
 const typeDefs = `
-  type School {
+  type User{
     _id: ID
     name: String
-    location: String
-    studentCount: Int
-    # Add a queryable field to retrieve an array of Class objects
-    classes: [Class]
+    email: String
+    password: String
+    skills: [Skill]
   }
 
-  type Class {
+  type Skill{
     _id: ID
-    name: String
-    building: String
-    creditHours: Int
-    # Add a queryable field to retrieve a single Professor object
-    professor: Professor
+    category: String
+    skill: String
   }
 
-  # Define what can be queried for each professor
-  type Professor {
-    _id: ID
-    name: String
-    officeHours: String
-    officeLocation: String
-    studentScore: Float
+  type Auth{
+    token: ID!
+    User: User
   }
 
-  type Query {
-    schools: [School]
-    classes: [Class]
-    professors: [Professor]
+  type Query{
+    me(UserId: ID!): User
+    getSkills: [Skill]
+    skillMatch(offererId: ID!, learnerId: ID!): [User]
+  }
+
+  type Mutation {
+    addUser(name: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+    addSkill(userId: ID!, skill: String!): User
+    removeSkill(userId: ID!, skill: String!): User
   }
 `;
 
