@@ -1,3 +1,4 @@
+
 const { User, Skill, Message } = require("../models");
 const { signToken, AuthenticationError} = require('../utils/auth');
 
@@ -5,6 +6,7 @@ const { signToken, AuthenticationError} = require('../utils/auth');
 const resolvers = {
   Query: {
     me: async (parent, { userId }, context) => {
+
       if(context.user){
         return User.findOne({ _id: userId });
       }
@@ -91,6 +93,7 @@ const resolvers = {
         return await message.populate('sender receiver').execPopulate();
       }
       throw AuthenticationError;
+     
     },
     addCalendarEvent: async() => {
       
