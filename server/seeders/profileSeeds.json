@@ -1,0 +1,123 @@
+[
+    {
+        "name": "Alex Johnson",
+        "email": "alex.johnson@example.com",
+        "password": "randomPassword1",
+        "skills": [
+            {
+                "category": "Photography",
+                "skill": "Post-Processing"
+            }
+        ]
+    },
+    {
+        "name": "Jessica Martinez",
+        "email": "jessica.martinez@example.com",
+        "password": "randomPassword2",
+        "skills": [
+            {
+                "category": "Art",
+                "skill": "Drawing and Sketching"
+            }
+        ]
+    },
+    {
+        "name": "Daniel Brown",
+        "email": "daniel.brown@example.com",
+        "password": "randomPassword3",
+        "skills": [
+            {
+                "category": "Fitness and Wellness",
+                "skill": "Nutrition and Diet Planning"
+            }
+        ]
+    },
+    {
+        "name": "Emily Davis",
+        "email": "emily.davis@example.com",
+        "password": "randomPassword4",
+        "skills": [
+            {
+                "category": "Social Media",
+                "skill": "Social Media Strategy"
+            }
+        ]
+    },
+    {
+        "name": "Michael Lee",
+        "email": "michael.lee@example.com",
+        "password": "randomPassword5",
+        "skills": [
+            {
+                "category": "Languages",
+                "skill": "Cultural Understanding"
+            }
+        ]
+    },
+    {
+        "name": "Sarah Wilson",
+        "email": "sarah.wilson@example.com",
+        "password": "randomPassword6",
+        "skills": [
+            {
+                "category": "Programming",
+                "skill": "Mobile App Development"
+            }
+        ]
+    },
+    {
+        "name": "David Miller",
+        "email": "david.miller@example.com",
+        "password": "randomPassword7",
+        "skills": [
+            {
+                "category": "Fitness and Wellness",
+                "skill": "Strength Training"
+            }
+        ]
+    },
+    {
+        "name": "Lauren Thompson",
+        "email": "lauren.thompson@example.com",
+        "password": "randomPassword8",
+        "skills": [
+            {
+                "category": "Photography",
+                "skill": "Types of Photography"
+            }
+        ]
+    },
+    {
+        "name": "James Anderson",
+        "email": "james.anderson@example.com",
+        "password": "randomPassword9",
+        "skills": [
+            {
+                "category": "Social Media",
+                "skill": "Ethical and Legal Considerations"
+            }
+        ]
+    },
+    {
+        "name": "Megan Taylor",
+        "email": "megan.taylor@example.com",
+        "password": "randomPassword10",
+        "skills": [
+            {
+                "category": "Baking",
+                "skill": "Cake Baking"
+            }
+        ]
+    },
+    {
+        "name": "Mila James",
+        "email": "mjames@example.com",
+        "password": "randotyPassword10",
+        "skills": [
+            {
+                "category": "Administration",
+                "skill": "Executive Assistant"
+            }
+        ]
+    }
+]

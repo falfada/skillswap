@@ -1,20 +1,32 @@
 {
-  "dependencies": {
-    "@apollo/server": "^4.10.5",
-    "express": "^4.19.2",
-    "graphql": "^16.9.0",
-    "mongodb": "^6.8.0",
-    "mongoose": "^8.5.2",
-    "node": "^20.16.0"
-  },
-  "name": "server",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+    "name": "skillswap",
+    "version": "1.0.0",
+    "description": "## Description",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest --testPathIgnorePatterns=../Client",
+        "start": "nodemon server/server.js",
+        "install": "cd server && npm i && cd ../Client && npm i",
+        "dev": "concurrently \"cd server && npm run watch\" \"cd Client && npm run dev\""
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@apollo/server": "^4.10.5",
+        "concurrently": "^8.2.2",
+        "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
+        "express": "^4.19.2",
+        "graphql": "^16.9.0",
+        "jsonwebtoken": "^9.0.2",
+        "jwt-decode": "^3.1.2",
+        "mongodb": "^6.8.0",
+        "mongoose": "^8.5.2",
+        "node": "^20.16.0",
+        "nodemon": "^3.1.4"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "supertest": "^7.0.0"
+    }
 }
