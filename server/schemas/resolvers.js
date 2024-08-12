@@ -1,6 +1,10 @@
-const { User, Skill } = require("../models");
 
-// TODO: Add the JWT Authentication and GraphQL Error
+const { AuthenticationError, UserInputError } = require('apollo-server-express');
+const { User, Skill } = require("../models");
+const { signToken } = require('../utils/auth'); // Assuming you have a function to sign JWT tokens
+
+
+// JWT Authentication and GraphQL Error
 const { GraphQLError } = require("graphql");
 const errorMessage = (message, codeMessage) => {
   return new GraphQLError(message, { extensions: { code: codeMessage } });
@@ -9,11 +13,11 @@ const errorMessage = (message, codeMessage) => {
 const resolvers = {
   Query: {
     me: async (parent, { userId }, context) => {
-      // TODO: Validate
-      // if(context.user){
-      //   return User.findOne({ _id: userId });
-      // }
-      // throw errorMessage("You must be logged in", "UNAUTHENTICATED");
+      // TODO: Validate user authentication
+       if(context.user){
+       return User.findOne({ _id: userId });
+      }
+     throw errorMessage("You must be logged in", "UNAUTHENTICATED");
       return User.findOne({ _id: userId });
     },
     getSkills: async () => {
@@ -54,22 +58,22 @@ const resolvers = {
       return { token, user };
     },
     addSkill: async (parent, { userId, skill }, context) => {
-      // if(context.user)
+     if(context.user)
       return User.findOneAndUpdate(
         { _id: userId },
         { $addToSet: { skills: skill } },
         { new: true, runValidators: true }
       );
-      // else throw errorMessage("You are not logged in", "UNAUTHENTICATED");
+     else throw errorMessage("You are not logged in", "UNAUTHENTICATED");
     },
     removeSkill: async (parent, { userId, skill }, context) => {
-      // if(context.user)
+   if(context.user)
       return User.findOneAndUpdate(
         { _id: userId },
         { $pull: { skills: skill } },
         { new: true }
       );
-      // else throw errorMessage("You are not logged in", "UNAUTHENTICATED");
+    else throw errorMessage("You are not logged in", "UNAUTHENTICATED");
     },
   },
 };
