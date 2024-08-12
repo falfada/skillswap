@@ -1,11 +1,13 @@
 import React from "react";
 import "./User.css";
 import { useState } from "react";
+
 function User() {
   const [formData, setFormData] = useState({
     user_id: "",
     fistName: "",
     lastName: "",
+    email:"",
     Skill: "",
     Description: "",
     url: "",
@@ -50,6 +52,16 @@ function User() {
             required={true}
             value={formData.lastName}
             type="text"
+            onChange={handleChange}
+          />
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            placeholder="email"
+            required={true}
+            value={formData.email}
+            type="email"
             onChange={handleChange}
           />
           <label htmlFor="Skill">Skill</label>

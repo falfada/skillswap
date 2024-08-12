@@ -1,16 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import UserHomepage from './Components/UserHomepage/UserHomepage.jsx';
-import Match from './Components/Match/Match.jsx';
-import Chat from "./Components/Chat/Chat.jsx"
-import User from './Components/User/User.jsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import UserHomepage from "./Components/UserHomepage/UserHomepage.jsx";
+import Match from "./Components/Match/Match.jsx";
+import Chat from "./Components/Chat/Chat.jsx";
+import User from "./Components/User/User.jsx";
+// import Calendar from "./Components/Calendar/Calendar.jsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
       {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
         path: "/Chat",
         element: <Chat />,
       },
+      // {
+      //   path: "/Calendar",
+      //   element: <Calendar />,
+      // },
       {
         path: "/User",
         element: <User />,
@@ -33,6 +38,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
 );
