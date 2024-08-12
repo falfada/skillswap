@@ -31,6 +31,7 @@ const Calendar = () => {
     ) {
       selected.event.remove();
     }
+    }
     return (
       <div className="flex justify-between">
         <div className=" flex-1 basis-[20%] bg-orange-200 p-15 rounded-2-sm">
