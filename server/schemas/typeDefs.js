@@ -19,7 +19,7 @@ const typeDefs = `
 
   type Auth{
     token: ID!
-    User: User
+    user: User
   }
 
   type Message {
