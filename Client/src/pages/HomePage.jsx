@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Nav from '../components/Nav';
+import Nav from '../Components/Nav';
 
 export default function HomePage() {
   const [steps, setSteps] = useState([]);
