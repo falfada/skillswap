@@ -7,8 +7,8 @@ const cookieParser = require("cookie-parser");
 const { expressMiddleware } = require('@apollo/server/express4'); // Import expressMiddleware
 const {authMiddleware} = require('./utils/auth');
 
-const setupLoginRoute = require("./routes/login");
-const setupAddRoute = require("./routes/add");
+// const setupLoginRoute = require("./routes/login");
+// const setupAddRoute = require("./routes/add");
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
@@ -45,8 +45,8 @@ app.post('/login', (req, res) => {
 })
 
 // Set up additional routes
-setupLoginRoute(app);
-setupAddRoute(app);
+// setupLoginRoute(app);
+// setupAddRoute(app);
 
 const startApolloServer = async () => {
   await server.start();

@@ -52,7 +52,7 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    getEvents: async (parent, args, context) => {
+    getCalendarEvents: async (parent, args, context) => {
       if(context.user){
         return Calendar.find().populate('user');
       }

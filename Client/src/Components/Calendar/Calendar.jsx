@@ -4,6 +4,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
+import { ListItem, ListItemText } from '@mui/material';
+
 
 const Calendar = () => {
   const [currentEvents, setCurrentEvents] = useState([]);
@@ -93,5 +95,4 @@ const Calendar = () => {
       </div>
     );
   };
-};
 export default Calendar;
