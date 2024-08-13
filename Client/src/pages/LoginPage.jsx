@@ -1,7 +1,6 @@
 import  { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { TEInput, TERipple } from 'tw-elements-react';
-import Nav from '../Components/Nav';
 import { LOGIN_USER } from '../utils/mutation';
 
 export default function LoginPage() {
@@ -35,7 +34,6 @@ export default function LoginPage() {
 
   return (
     <div>
-      <Nav />
       <section className="h-full bg-gradient-to-r from-orange-400 to-white flex justify-center items-center">
         <div className="container h-full p-10">
           <div className="flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">

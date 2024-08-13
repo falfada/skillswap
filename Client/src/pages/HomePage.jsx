@@ -1,5 +1,5 @@
 import  { useState, useEffect } from 'react';
-import Nav from '../Components/Nav';
+
 
 export default function HomePage() {
   const [steps, setSteps] = useState([]);
@@ -32,7 +32,7 @@ export default function HomePage() {
 
   return (
     <section className="h-full bg-gradient-to-r from-pink-300 via-white to-white">
-      <Nav />
+  
       <div className="container h-full p-10">
         <div className="text-center my-16 animate-fade-in-down">
           <h1 className="text-4xl font-bold text-gray-800">Do you have a skill you’d like to share or collaborate on?</h1>
