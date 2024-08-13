@@ -1,76 +1,81 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 // Query to get the logged-in user's information
 export const GET_ME = gql`
-  query me {
+  query Me {
     me {
       _id
-      username
+      name
       email
-      savedSkills {
-        skillId
-        name
-        description
-        level
-        image
-        link
+      skills {
+        _id
+        skill
+      }
+      messages {
+        _id
+        content
+        timestamp
+        receiver {
+          _id
+          name
+        }
+      }
+      events {
+        _id
+        title
+        startTime
+        endTime
+        location
       }
     }
   }
 `;
 
 // Query to get all users
-export const GET_USERS = gql`
-  query getUsers {
-    users {
-      _id
-      username
-      email
-      savedSkills {
-        skillId
-        name
-        description
-        level
-        image
-        link
-      }
-    }
-  }
-`;
+// export const GET_USERS = gql`
+//   query getUsers {
+//     users {
+//       _id
+//       username
+//       email
+//       savedSkills {
+//         skillId
+//         name
+//         description
+//         level
+//         image
+//         link
+//       }
+//     }
+//   }
+// `;
 
 // Query to get a specific user by ID
-export const GET_USER_BY_ID = gql`
-  query getUserById($id: ID!) {
-    user(id: $id) {
-      _id
-      username
-      email
-      savedSkills {
-        skillId
-        name
-        description
-        level
-        image
-        link
-      }
-    }
-  }
-`;
+// export const GET_USER_BY_ID = gql`
+//   query getUserById($id: ID!) {
+//     user(id: $id) {
+//       _id
+//       username
+//       email
+//       savedSkills {
+//         skillId
+//         name
+//         description
+//         level
+//         image
+//         link
+//       }
+//     }
+//   }
+// `;
 
 // Query to get all skills
 export const GET_ALL_SKILLS = gql`
-  query getAllSkills {
+  query getSkills {
     skills {
-      skillId
-      name
-      description
-      level
-      image
-      link
-      user {
-        _id
-        username
-      }
+      _id
+      category
+      skill
     }
   }
 `;
@@ -78,16 +83,13 @@ export const GET_ALL_SKILLS = gql`
 // Query to get a specific skill by ID
 export const GET_SKILL_BY_ID = gql`
   query getSkillById($skillId: ID!) {
-    skill(skillId: $skillId) {
-      skillId
-      name
-      description
-      level
-      image
-      link
+    getSingleSkill(skillId: $skillId) {
+      _id
+      skill
+      category
       user {
         _id
-        username
+        name
       }
     }
   }
@@ -95,17 +97,14 @@ export const GET_SKILL_BY_ID = gql`
 
 // Query to search skills by name or description
 export const SEARCH_SKILLS = gql`
-  query searchSkills($name: String!) {
-    searchSkills(name: $name) {
-      skillId
-      name
-      description
-      level
-      image
-      link
+  query searchSkills($category: String!, $skill: String!) {
+    searchSkills(category: $category, skill: $skill) {
+      _id
+      skill
+      category
       user {
         _id
-        username
+        name
       }
     }
   }
@@ -113,17 +112,17 @@ export const SEARCH_SKILLS = gql`
 
 // Query to get all messages for the logged-in user
 export const GET_MESSAGES = gql`
-  query getMessages {
-    messages {
+  query getMessages($userId: ID!) {
+    getMessages(userId: $userId) {
       _id
       content
       sender {
-        username
+        email
       }
       recipient {
-        username
+        email
       }
-      createdAt
+      timestamp
     }
   }
 `;
@@ -131,17 +130,18 @@ export const GET_MESSAGES = gql`
 // Query to get calendar events (assuming you store them in your DB)
 export const GET_CALENDAR_EVENTS = gql`
   query getCalendarEvents {
-    events {
+    getCalendarEvents {
       _id
       title
-      description
       startTime
       endTime
       location
       user {
         _id
-        username
+        email
       }
     }
   }
 `;
+
+// TODO: Add SkillMatch Query
