@@ -1,10 +1,10 @@
 
 // import React from 'react';
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Navbar from './Components/Nav';
-// import SideBar from "./Components/Sidebar/SideBar";
+import Sidebar from "./Components/Sidebar/SideBar";
 
 
 // Create an http link to connect to your GraphQL server
@@ -32,10 +32,11 @@ const client = new ApolloClient({
 
 
 function App() {
+  const location = useLocation();
+  const isSidebarLayout = location.pathname.startsWith('/user');
   return (
     <ApolloProvider client={client}>  {/* Wrap your app with ApolloProvider */}
-      {/* <SideBar /> */}
-      <Navbar />
+      {isSidebarLayout ? <Sidebar /> : <Navbar/>}
       <Outlet />
     </ApolloProvider>
   );
