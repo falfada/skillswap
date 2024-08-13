@@ -55,7 +55,7 @@ const typeDefs = `
     me(UserId: ID!): User
     getSkills: [Skill]
     getSingleSkill(skillId: ID!): Skill 
-    searchSkill(category: String, skill: String): [Skill]
+    searchSkills(category: String, skill: String): [Skill]
     skillMatch(offererId: ID!, learnerId: ID!): [User]
     getMessages(userId: ID!): [Message]
     getCalendarEvents: [CalendarEvent]
@@ -69,6 +69,7 @@ const typeDefs = `
     removeSkill(userId: ID!, skillId: ID!): User
     sendMessage(receiverId: ID!, content: String!): Message
     addCalendarEvent(input: CalendarEventInput!): CalendarEvent
+    removeCalendarEvent(eventId: ID!): User
   }
 `;
 

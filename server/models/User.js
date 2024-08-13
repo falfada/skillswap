@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const Skill = require('./Skill');
 const Message = require('./Message');
-const Calendar = require('./CalendarEvent'); 
+const Calendar = require('./Calendar'); 
 const bcrypt = require('bcrypt');
 
 
