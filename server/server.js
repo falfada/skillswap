@@ -5,7 +5,7 @@ const cors = require('cors');
 const path = require('path');
 const cookieParser = require("cookie-parser");
 const { expressMiddleware } = require('@apollo/server/express4'); // Import expressMiddleware
-const {authMiddleware} = require('./utils/auth');
+const { authMiddleware } = require('./utils/auth');
 
 
 const { typeDefs, resolvers } = require('./schemas');
@@ -33,26 +33,26 @@ app.get("/", (req, res) => {
 const startApolloServer = async () => {
   await server.start();
 
-    app.use(express.urlencoded({extended: false}));
-    app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
 
-    app.use(express.static(path.join(__dirname, '../client/dist')));
+  app.use(express.static(path.join(__dirname, '../client/dist')));
 
-    app.use('/graphql', expressMiddleware(server, {
-      context: authMiddleware
-    }));
+  app.use('/graphql', expressMiddleware(server, {
+    context: authMiddleware
+  }));
 
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-    })
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+  })
 
 
-    db.once('open', () => {
-        app.listen(PORT, () => {
-            console.log(`API server running on pORT ${PORT}`);
-            console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
-        });
-    })
+  db.once('open', () => {
+    app.listen(PORT, () => {
+      console.log(`API server running on pORT ${PORT}`);
+      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+    });
+  })
 
 }
 

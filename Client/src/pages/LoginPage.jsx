@@ -1,99 +1,108 @@
-import React from 'react';
+import  { useState } from 'react';
+import { useMutation } from '@apollo/client';
 import { TEInput, TERipple } from 'tw-elements-react';
-import Nav from '../components/Nav';
+import Nav from '../Components/Nav';
+import { LOGIN_USER } from '../utils/mutation';
 
 export default function LoginPage() {
+  const [loginInfo, setLoginInfo] = useState({
+    email: '',
+    password: ''
+  });
+
+  const [login, { error, loading }] = useMutation(LOGIN_USER, {
+    onCompleted: (data) => {
+      console.log('User logged in:', data);
+      // Store the token in local storage or state management library
+      localStorage.setItem('token', data.login.token);
+      // Redirect to dashboard or homepage
+      window.location.href = '/user';
+    },
+    onError: (err) => {
+      console.error('Error logging in:', err.message);
+    }
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginInfo({ ...loginInfo, [name]: value });
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    login({ variables: { email: loginInfo.email, password: loginInfo.password } });
+  };
+
   return (
-    <section className="h-full bg-neutral-200 dark:bg-neutral-700">
+    <div>
       <Nav />
-      <div className="container h-full p-10">
-        <div className="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
-          <div className="w-full">
-            <div className="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
-              <div className="g-0 lg:flex lg:flex-wrap">
-                <div className="px-4 md:px-0 lg:w-6/12">
-                  <div className="md:mx-6 md:p-12">
-                    <div className="text-center">
-                      <img
-                        className="mx-auto w-48"
-                        src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                        alt="logo"
-                      />
-                      <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
-                      Skillswap - Trade Skills, No Bills 
-                      </h4>
-                    </div>
-
-                    <form>
-                      <p className="mb-4">Please login to your account</p>
-                      <TEInput
-                        type="text"
-                        label="Username"
-                        className="mb-4"
-                      ></TEInput>
-
-                      <TEInput
-                        type="password"
-                        label="Password"
-                        className="mb-4"
-                      ></TEInput>
-
-                      <div className="mb-12 pb-1 pt-1 text-center">
-                        <TERipple rippleColor="light" className="w-full">
-                          <button
-                            className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                            type="button"
-                            style={{
-                              background:
-                                "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
-                            }}
-                          >
-                            Log in
-                          </button>
-                        </TERipple>
-
-                        <a href="#!">Forgot password?</a>
-                      </div>
-
-                      <div className="flex items-center justify-between pb-6">
-                        <p className="mb-0 mr-2">Don't have an account?</p>
-                        <TERipple rippleColor="light">
-                          <button
-                            type="button"
-                            className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                          >
-                            Register
-                          </button>
-                        </TERipple>
-                      </div>
-                    </form>
-                  </div>
+      <section className="h-full bg-gradient-to-r from-orange-400 to-white flex justify-center items-center">
+        <div className="container h-full p-10">
+          <div className="flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
+            <div className="w-full max-w-md">
+              <div className="block rounded-lg bg-white shadow-lg p-8">
+                <div className="text-center mb-6">
+                  <img
+                    className="mx-auto w-48"
+                    src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                    alt="logo"
+                  />
+                  <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
+                    Skillswap - Trade Skills, No Bills
+                  </h4>
                 </div>
-
-                <div
-                  className="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none"
-                  style={{
-                    background:
-                      "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
-                  }}
-                >
-                  <div className="px-4 py-6 text-white md:mx-6 md:p-12">
-                    <h4 className="mb-6 text-xl font-semibold">
-                      We are more than just a company
-                    </h4>
-                    <p className="text-sm">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </p>
+                {error && <div className="text-red-500 text-center mb-4">{error.message}</div>}
+                <form onSubmit={handleLogin}>
+                  <p className="mb-4">Please login to your account</p>
+                  <TEInput
+                    type="email"
+                    label="Email"
+                    name="email"
+                    value={loginInfo.email}
+                    onChange={handleChange}
+                    className="mb-4"
+                    required
+                  ></TEInput>
+                  <TEInput
+                    type="password"
+                    label="Password"
+                    name="password"
+                    value={loginInfo.password}
+                    onChange={handleChange}
+                    className="mb-6"
+                    required
+                  ></TEInput>
+                  <div className="text-center">
+                    <TERipple rippleColor="light" className="w-full">
+                      <button
+                        type="submit"
+                        className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-600 disabled:opacity-50"
+                        disabled={loading}
+                      >
+                        {loading ? 'Logging in...' : 'Log In'}
+                      </button>
+                    </TERipple>
+                    <a href="#!" className="inline-block mt-4 text-orange-500">
+                      Forgot password?
+                    </a>
                   </div>
+                </form>
+                <div className="flex items-center justify-between pb-6">
+                  <p className="mb-0 mr-2">Don't have an account?</p>
+                  <TERipple rippleColor="light">
+                    <button
+                      type="button"
+                      className="inline-block rounded border-2 border-orange-500 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-orange-500 transition duration-150 ease-in-out hover:bg-orange-500 hover:text-white focus:outline-none"
+                    >
+                      Register
+                    </button>
+                  </TERipple>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
