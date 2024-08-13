@@ -6,12 +6,15 @@ const typeDefs = `
     email: String
     password: String
     skills: [Skill]
-  }
+    messages: [Message]
+    events: [CalendarEvent]
+    }
 
   type Skill{
     _id: ID
     category: String
     skill: String
+    users: [User]
   }
 
   type Auth{
@@ -27,6 +30,15 @@ const typeDefs = `
     timestamp: String!
   }
 
+  type CalendarEvent {
+    _id: ID!
+    title: String
+    startTime: String
+    endTime: String
+    location: String
+    user: User
+  }
+
   input SkillInput {
     category: String!
     skill: String!
@@ -34,7 +46,6 @@ const typeDefs = `
 
   input CalendarEventInput {
     title: String!
-    description: String
     startTime: String!
     endTime: String!
     location: String
@@ -43,8 +54,11 @@ const typeDefs = `
   type Query{
     me(UserId: ID!): User
     getSkills: [Skill]
+    getSingleSkill(skillId: ID!): Skill 
+    searchSkill(category: String, skill: String): [Skill]
     skillMatch(offererId: ID!, learnerId: ID!): [User]
-    getMessages(userId: ID!): [Message!]!
+    getMessages(userId: ID!): [Message]
+    getCalendarEvents: [CalendarEvent]
   }
 
   type Mutation {
@@ -53,8 +67,8 @@ const typeDefs = `
     updateUser(name: String!, email: String!, password: String!): User
     addSkill(userId: ID!, skill: SkillInput!): User
     removeSkill(userId: ID!, skillId: ID!): User
-    sendMessage(receiverId: ID!, content: String!): Message!
-
+    sendMessage(receiverId: ID!, content: String!): Message
+    addCalendarEvent(input: CalendarEventInput!): CalendarEvent
   }
 `;
 

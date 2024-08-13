@@ -88,27 +88,24 @@ export const SEND_MESSAGE = gql`
 export const ADD_CALENDAR_EVENT = gql`
   mutation addCalendarEvent(
     $title: String!
-    $description: String
     $startTime: String!
     $endTime: String!
     $location: String
   ) {
     addCalendarEvent(
       title: $title
-      description: $description
       startTime: $startTime
       endTime: $endTime
       location: $location
     ) {
       _id
       title
-      description
       startTime
       endTime
       location
       user {
         _id
-        username
+        email
       }
     }
   }
@@ -120,7 +117,6 @@ export const REMOVE_CALENDAR_EVENT = gql`
     removeCalendarEvent(eventId: $eventId) {
       _id
       title
-      description
       startTime
       endTime
       location

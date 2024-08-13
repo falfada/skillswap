@@ -5,6 +5,7 @@ const cors = require('cors');
 const path = require('path');
 const cookieParser = require("cookie-parser");
 const { expressMiddleware } = require('@apollo/server/express4'); // Import expressMiddleware
+const {authMiddleware} = require('./utils/auth');
 
 const setupLoginRoute = require("./routes/login");
 const setupAddRoute = require("./routes/add");
@@ -50,8 +51,27 @@ setupAddRoute(app);
 const startApolloServer = async () => {
   await server.start();
 
-  // Apollo server middleware
-  app.use('/graphql', expressMiddleware(server));
+    app.use(express.urlencoded({extended: false}));
+    app.use(express.json());
+
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+
+    app.use('/graphql', expressMiddleware(server, {
+      context: authMiddleware
+    }));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    })
+
+    
+
+    db.once('open', () => {
+        app.listen(PORT, () => {
+            console.log(`API server running on pORT ${PORT}`);
+            console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+        });
+    })
 
   // Database Connection and Server Start
   db.once('open', () => {
