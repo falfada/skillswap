@@ -1,7 +1,8 @@
-import  { useState, useEffect } from 'react';
-
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
+  const currentYear = new Date().getFullYear();
   const [steps, setSteps] = useState([]);
   const [featuredSkills, setFeaturedSkills] = useState([]);
   const [faqs, setFaqs] = useState([]);
@@ -9,99 +10,141 @@ export default function HomePage() {
   useEffect(() => {
     // Define the data for steps, featured skills, and FAQs directly here.
     setSteps([
-      { step: 'STEP 1', description: 'Description for step 1' },
-      { step: 'STEP 2', description: 'Description for step 2' },
-      { step: 'STEP 3', description: 'Description for step 3' },
-      { step: 'STEP 4', description: 'Description for step 4' },
+      {
+        step: "List Your Skills and Learning Goals",
+        description:
+          "Begin by creating your profile and listing the skills you have to offer as well as the ones you wish to learn.",
+      },
+      {
+        step: "Discover Your Matches",
+        description:
+          "Our smart matching algorithm will connect you with people who possess the skills you want to learn and who are interested in the skills you offer.",
+      },
+      {
+        step: "Connect and Communicate",
+        description:
+          "Once you've found someone you’re interested in, you can easily reach out to them via our messaging system.",
+      },
+      {
+        step: "Schedule a Meeting",
+        description:
+          "To make the exchange more productive, you can set up a meeting through our integrated calendar. Coordinate a convenient time to meet, whether it's virtually or in person, to start your skill-swapping journey.",
+      },
     ]);
 
     setFeaturedSkills([
-      'Web Development',
-      'Graphic Design',
-      'Project Management',
-      'Digital Marketing',
-      'Data Analysis',
+      "Web Development",
+      "Graphic Design",
+      "Project Management",
     ]);
 
     setFaqs([
-      { question: 'Question 1', answer: 'Answer to question 1' },
-      { question: 'Question 2', answer: 'Answer to question 2' },
-      { question: 'Question 3', answer: 'Answer to question 3' },
+      { question: "How do I list the skills I have and the ones I want to learn?", answer: "To list your skills and learning goals, first create a profile on our app. Once you're logged in, navigate to the Profile section where you'll find options to add the skills you offer and the skills you wish to learn. Simply enter your skills and interests into the respective fields, and our smart algorithm will start matching you with others who have complementary skills."},
+      { question: "How does the matching algorithm work?", answer: "Our matching algorithm uses your listed skills and learning goals to connect you with other users who have the skills you want to learn and who are interested in the skills you offer. The algorithm considers factors like skill level, location, and availability to provide the best possible matches. You’ll see a list of potential matches and can view their profiles to find the right person to connect with." },
+      { question: "Can I communicate with my matches through the app?", answer: "Yes, you can! Once you’ve found a match, you can communicate with them using our built-in messaging system. You can send and receive messages directly within the app to discuss your skill exchange. Additionally, you can schedule meetings through our integrated calendar to set up virtual or in-person meetups to facilitate the skill swap." },
     ]);
   }, []);
 
   return (
-    <section className="h-full bg-gradient-to-r from-pink-300 via-white to-white">
-  
-      <div className="container h-full p-10">
+    <section className="w-full bg-gradient-to-r from-pink-300 via-white to-white">
+      <div className="container mx-auto flex-wrap p-10">
         <div className="text-center my-16 animate-fade-in-down">
-          <h1 className="text-4xl font-bold text-gray-800">Do you have a skill you’d like to share or collaborate on?</h1>
-          <button className="mt-8 px-8 py-3 bg-pink-500 text-white rounded-full shadow-lg transition transform hover:scale-105 hover:shadow-xl">
-            Get started
-          </button>
+          <h1 className="text-4xl font-bold text-gray-800">
+            Do you have a skill you’d like to share or collaborate on?
+          </h1>
+          <Link to="/signup">
+            <button className="mt-8 px-8 py-3 bg-pink-500 text-white rounded-full shadow-lg transition transform hover:scale-105 hover:shadow-xl">
+              Get started
+            </button>
+          </Link>
         </div>
 
-        <div className="my-16 animate-fade-in-left">
-          <h2 className="text-2xl font-semibold mb-8 text-gray-700">How it works</h2>
+        <div className="w-full my-16 animate-fade-in-left">
+          <h2 className="text-2xl text-center font-semibold mb-8 text-gray-700">
+            How it works
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center transition transform hover:scale-105 hover:shadow-lg">
+              <div
+                key={index}
+                className="bg-white p-6 rounded-lg shadow-md text-center transition transform hover:scale-105 hover:shadow-lg"
+              >
                 <h3 className="text-xl font-bold text-pink-600">{step.step}</h3>
-                <p className="text-gray-600">{step.description}</p>
+                <p className="mt-2 text-gray-600">{step.description}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="my-16 animate-fade-in-right">
-          <h2 className="text-2xl font-semibold mb-8 text-gray-700">Featured skills</h2>
-          <div className="flex flex-col gap-4">
+        <div className="w-full flex flex-wrap justify-center items-center my-16 animate-fade-in-right gap-4">
+          <h2 className="w-full text-center text-2xl font-semibold text-gray-700">
+            Featured skills
+          </h2>
+          <div className="w-1/3 flex flex-col gap-4">
             {featuredSkills.map((skill, index) => (
-              <div key={index} className="bg-white p-4 rounded-full shadow-md text-center text-pink-500 font-semibold transition transform hover:scale-105 hover:shadow-lg">
+              <div
+                key={index}
+                className="bg-white p-4 rounded-full shadow-md text-center text-pink-500 font-semibold transition transform hover:scale-105 hover:shadow-lg"
+              >
                 {skill}
               </div>
             ))}
           </div>
+          <div className="w-1/3 h-96 overflow-hidden flex justify-center items-center rounded-lg">
+            <img src="https://images.pexels.com/photos/3277806/pexels-photo-3277806.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
+          </div>
         </div>
 
-        <div className="my-16 animate-fade-in-up">
+        <div className="w-full my-16 animate-fade-in-up">
           <h2 className="text-2xl font-semibold mb-8 text-gray-700">FAQ</h2>
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-white p-4 rounded-lg shadow-md">
-                <details className="transition transform hover:scale-105 hover:shadow-lg">
-                  <summary className="font-semibold text-pink-600">{faq.question}</summary>
-                  <p className="text-gray-600">{faq.answer}</p>
-                </details>
-              </div>
+              <details key={index} className="cursor-pointer bg-white p-4 rounded-lg shadow-md transition transform hover:scale-105 hover:shadow-lg">
+                
+                  <summary className="font-semibold text-pink-600">
+                    {faq.question}
+                  </summary>
+                  <p className="mt-2 text-gray-600">{faq.answer}</p>
+          
+              </details>
             ))}
           </div>
         </div>
-        
-        <footer className="bg-pink-600 text-white p-10 rounded-t-lg animate-fade-in-up">
-          <div className="flex justify-between">
-            <div>
-              <h3 className="font-bold">SKILLSWAP</h3>
-              <p>Created by</p>
-              <p>Copyright</p>
-            </div>
-            <div>
-              <h3 className="font-bold">Quick Links</h3>
-              <p>Home</p>
-            </div>
-            <div>
-              <h3 className="font-bold">Social</h3>
-              <p>Instagram</p>
-              <p>Facebook</p>
-            </div>
-            <div>
-              <h3 className="font-bold">Contact Us</h3>
-              <p>info@skillswap.com</p>
-              <p>xx xxx xxxx</p>
-            </div>
-          </div>
-        </footer>
       </div>
+
+      <footer className="w-full bg-pink-600 text-white p-10 rounded-t-lg animate-fade-in-up">
+        <div className="flex justify-between">
+          <div>
+            <h3 className="font-bold">SKILLSWAP</h3>
+            <p>
+              Created by{" "}
+              <a href="https://github.com/ANDRESGOM77" target="_blank" rel="noopener noreferrer">
+                Andres,
+              </a>{" "}
+              <a href="https://github.com/falfada" target="_blank" rel="noopener noreferrer">Daniela,</a>
+              {" "}
+              <a href="https://github.com/rhiannawilson" target="_blank" rel="noopener noreferrer">Rhianna</a>
+              {" "}&{" "} 
+              <a href="https://github.com/SoniiPP" target="_blank" rel="noopener noreferrer">Soni</a>
+            </p>
+            <p>Copyright {currentYear}</p>
+          </div>
+          <div>
+            <h3 className="font-bold">Quick Links</h3>
+            <p>Home</p>
+          </div>
+          <div>
+            <h3 className="font-bold">Social</h3>
+            <p>Instagram</p>
+            <p>Facebook</p>
+          </div>
+          <div>
+            <h3 className="font-bold">Contact Us</h3>
+            <p>info@skillswap.com</p>
+            <p>0412 345 678</p>
+          </div>
+        </div>
+      </footer>
     </section>
   );
 }
