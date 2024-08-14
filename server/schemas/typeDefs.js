@@ -51,6 +51,10 @@ const typeDefs = `
     location: String
   }
 
+  type Checkout {
+    session: ID
+  }
+    
   type Query{
     me: User
     getSkills: [Skill]
@@ -59,7 +63,9 @@ const typeDefs = `
     skillMatch(offererId: ID!, learnerId: ID!): [User]
     getMessages(userId: ID!): [Message]
     getCalendarEvents: [CalendarEvent]
+    checkout(donation: Int): Checkout
   }
+    
 
   type Mutation {
     login(email: String!, password: String!): Auth
@@ -70,6 +76,7 @@ const typeDefs = `
     sendMessage(receiverId: ID!, content: String!): Message
     addCalendarEvent(input: CalendarEventInput!): CalendarEvent
     removeCalendarEvent(eventId: ID!): User
+
   }
 `;
 
