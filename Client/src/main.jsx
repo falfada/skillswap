@@ -47,6 +47,10 @@ const router = createBrowserRouter([
               path: 'profile',
               element: <User />,
             },
+            // {
+            //   path: 'logout',
+            //   element: <HomePage />,
+            // }
           ],
         },
       ],

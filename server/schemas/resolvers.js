@@ -94,41 +94,52 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    addSkill: async (parent, { userId, skill }, context) => {
+    addSkill: async (parent, { skill }, context) => {
       if (context.user) {
-        let skillDoc = await Skill.findOne(skill);
+        if (!skill || !skill.skill || !skill.category) {
+          throw new Error('Invalid skill input');
+        }
+  
+        let skillDoc = await Skill.findOne({ skill: skill.skill, category: skill.category });
         if (!skillDoc) {
           skillDoc = await Skill.create(skill);
         }
+  
+        const updatedUser = await User.findByIdAndUpdate(
+          context.user._id,
+          { $addToSet: { skills: skillDoc._id } },
+          { new: true } 
+        ).populate('skills');
 
-        await User.findByIdAndUpdate(userId, {
-          $addToSet: { skills: skillDoc._id },
-        });
-
-        await Skill.findByIdAndUpdate(skillDoc._id, {
-          $addToSet: { users: userId },
-        });
-
-        return User.findById(userId).populate("skills");
+  
+        if (!updatedUser) {
+          throw new Error('User not found');
+        }
+  
+        await Skill.findByIdAndUpdate(
+          skillDoc._id,
+          { $addToSet: { users: context.user._id } }
+        );
+  
+        return updatedUser;
       }
       throw AuthenticationError;
     },
-    removeSkill: async (parent, { userId, skillId }, context) => {
+    removeSkill: async (parent, { skillId }, context) => {
       if (context.user) {
         await User.findByIdAndUpdate(
-          userId,
+          context.user._id,
           { $pull: { skills: skillId } },
           { new: true }
         );
 
         await Skill.findByIdAndUpdate(
           skillId,
-          { $pull: { users: userId } },
+          { $pull: { users: context.user._id } },
           { new: true }
         );
 
-
-        return User.findById(userId).populate('skills');
+        return User.findById(context.user._id).populate('skills');
       }
       throw new AuthenticationError('You must be logged in');
     },

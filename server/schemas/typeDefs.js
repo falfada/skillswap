@@ -14,7 +14,7 @@ const typeDefs = `
     _id: ID
     category: String
     skill: String
-    users: [User]
+    
   }
 
   type Auth{
@@ -40,8 +40,8 @@ const typeDefs = `
   }
 
   input SkillInput {
-    category: String!
     skill: String!
+    category: String!
   }
 
   input CalendarEventInput {
@@ -65,8 +65,8 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
     addUser(name: String!, email: String!, password: String!): Auth
     updateUser(name: String!, email: String!): User
-    addSkill(userId: ID!, skill: SkillInput!): User
-    removeSkill(userId: ID!, skillId: ID!): User
+    addSkill(skill: SkillInput!): Skill
+    removeSkill(skillId: ID!): User
     sendMessage(receiverId: ID!, content: String!): Message
     addCalendarEvent(input: CalendarEventInput!): CalendarEvent
     removeCalendarEvent(eventId: ID!): User

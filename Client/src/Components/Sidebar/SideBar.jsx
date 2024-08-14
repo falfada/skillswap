@@ -9,17 +9,23 @@ import { CiUser } from "react-icons/ci";
 import { CiSettings } from "react-icons/ci";
 import { SlLogout } from "react-icons/sl";
 import logo from '../Logo/SkillSwapLOGO.png';
+import Auth from "../../utils/auth";
 
 function SideBar() {
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+
   const menus = [
     { name: "Home", icon: FaHome, link: "/" },
-    { name: "Match", icon: MdOutlineConnectWithoutContact, link: "/Match" },
-    {name: "chat", icon:IoChatboxEllipsesOutline, link: "/Chat"},
-    { name: "Calendar", icon: CiCalendar, link: "/Calendar" },
+    { name: "Match", icon: MdOutlineConnectWithoutContact, link: "user/Match" },
+    { name: "chat", icon: IoChatboxEllipsesOutline, link: "user/Chat" },
+    { name: "Calendar", icon: CiCalendar, link: "user/Calendar" },
     { name: "User", icon: CiUser, link: "user/profile" },
-    { name: "Settings", icon: CiSettings, link: "/Settings" },
   ];
   const [open, setOpen] = useState(true);
+
   return (
     <section className="flex gap-6">
       <div
@@ -55,6 +61,7 @@ function SideBar() {
             </Link>
           ))}
         </div>
+
         <div >
         <Link
               to="/logout"
