@@ -69,8 +69,11 @@ const resolvers = {
       line_items.push({
         price_data: {
           currency: 'usd',
-
-          unit_amount: donation * 100,
+          product_data: {
+            name: 'Donation',
+            description: 'Support our platform',
+          },
+          unit_amount: donation * 100, // amount in cents
         },
         quantity: 1,
       });
