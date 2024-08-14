@@ -124,7 +124,9 @@ function User() {
             onChange={handleChange}
           />
 
-          <input type="submit" value="Update" className="bg-blue-600 text-white" />
+  
+
+          <input type="submit" value="Update" className="bg-cyan-950 text-white" />
         </section>
       </form>
 

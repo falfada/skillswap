@@ -13,6 +13,7 @@ export const LOGIN_USER = gql`
   }
 `;
 
+
 // Mutation to add a new user (sign-up)
 export const ADD_USER = gql`
   mutation addUser($name: String!, $email: String!, $password: String!) {
