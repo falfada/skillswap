@@ -1,4 +1,4 @@
-import React from "react";
+import "react";
 import "./User.css";
 import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
@@ -76,7 +76,7 @@ function User() {
 
   
 
-          <input type="submit" className="bg-blue-600 text-white" />
+          <input type="submit" className="bg-cyan-950 text-white" />
         </section>
         {/* <section className="flex flex-col p-6 w-1/2">
           <label htmlFor="about">Profile image</label>

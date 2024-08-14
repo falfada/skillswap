@@ -1,4 +1,4 @@
-import React from "react";
+import "react";
 import TinderCard from "react-tinder-card";
 import { useState } from "react";
 import "./UserHomepage.css";
@@ -76,7 +76,7 @@ function UserHomepage() {
                   style={{ backgroundImage: "url(" + character.url + ")" }}
                   className="card"
                 >
-                  <div className="absolute top-3/4 p-8 bg-slate-100 w-full">
+                  <div className="absolute top-3/4 p-8 w-full">
                     <h3>{character.name}</h3>
                     <p>{character.skill}</p>
                   </div>
