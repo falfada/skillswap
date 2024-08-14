@@ -20,7 +20,7 @@ function SideBar() {
     { name: "Home", icon: FaHome, link: "/" },
     { name: "Match", icon: MdOutlineConnectWithoutContact, link: "user/Match" },
     { name: "chat", icon: IoChatboxEllipsesOutline, link: "user/Chat" },
-    { name: "Calendar", icon: CiCalendar, link: "user/Calendar" },
+    { name: "Calendar", icon: CiCalendar, link: "user/calendar" },
     { name: "User", icon: CiUser, link: "user/profile" },
   ];
   const [open, setOpen] = useState(true);

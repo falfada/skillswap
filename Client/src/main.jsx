@@ -9,6 +9,7 @@ import UserHomepage from './Components/UserHomepage/UserHomepage.jsx';
 import Match from './Components/Match/Match.jsx';
 import Chat from "./Components/Chat/Chat.jsx";
 import User from './Components/User/User.jsx';
+import Calendar from './Components/Calendar/Calendar.jsx'
 import Signup from './pages/SignUpPage.jsx'; // Import the Signup component
 import Login from './pages/LoginPage.jsx'; // Import the Login component
 const router = createBrowserRouter([
@@ -53,6 +54,11 @@ const router = createBrowserRouter([
             {
               path: 'profile',
               element: <User />,
+            },
+
+            {
+              path: 'calendar', // Ensure this path is correctly defined
+              element: <Calendar />, 
             },
             // {
             //   path: 'logout',
