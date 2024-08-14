@@ -39,8 +39,8 @@ export const UPDATE_USER = gql`
 
 // Mutation to add a new skill
 export const ADD_SKILL = gql`
-  mutation addSkill($userId: ID!, $skill: SkillInput!) {
-    addSkill(userId: $userId, skill: $skill) {
+  mutation addSkill($skill: SkillInput!) {
+    addSkill(skill: $skill) {
       _id
       email
       skills {
