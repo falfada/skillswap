@@ -52,7 +52,7 @@ const typeDefs = `
   }
 
   type Query{
-    me(UserId: ID!): User
+    me: User
     getSkills: [Skill]
     getSingleSkill(skillId: ID!): Skill 
     searchSkills(category: String, skill: String): [Skill]
@@ -64,7 +64,7 @@ const typeDefs = `
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(name: String!, email: String!, password: String!): Auth
-    updateUser(name: String!, email: String!, password: String!): User
+    updateUser(name: String!, email: String!): User
     addSkill(userId: ID!, skill: SkillInput!): User
     removeSkill(userId: ID!, skillId: ID!): User
     sendMessage(receiverId: ID!, content: String!): Message

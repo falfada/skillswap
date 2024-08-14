@@ -15,7 +15,7 @@ function SideBar() {
     { name: "Match", icon: MdOutlineConnectWithoutContact, link: "/Match" },
     {name: "chat", icon:IoChatboxEllipsesOutline, link: "/Chat"},
     { name: "Calendar", icon: CiCalendar, link: "/Calendar" },
-    { name: "User", icon: CiUser, link: "/User" },
+    { name: "User", icon: CiUser, link: "user/profile" },
     { name: "Settings", icon: CiSettings, link: "/Settings" },
   ];
   const [open, setOpen] = useState(true);
