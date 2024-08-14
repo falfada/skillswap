@@ -8,17 +8,23 @@ import { CiCalendar } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { CiSettings } from "react-icons/ci";
 import { SlLogout } from "react-icons/sl";
+import Auth from "../../utils/auth";
 
 function SideBar() {
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+
   const menus = [
     { name: "Home", icon: FaHome, link: "/" },
-    { name: "Match", icon: MdOutlineConnectWithoutContact, link: "/Match" },
-    {name: "chat", icon:IoChatboxEllipsesOutline, link: "/Chat"},
-    { name: "Calendar", icon: CiCalendar, link: "/Calendar" },
+    { name: "Match", icon: MdOutlineConnectWithoutContact, link: "user/Match" },
+    { name: "chat", icon: IoChatboxEllipsesOutline, link: "user/Chat" },
+    { name: "Calendar", icon: CiCalendar, link: "user/Calendar" },
     { name: "User", icon: CiUser, link: "user/profile" },
-    { name: "Settings", icon: CiSettings, link: "/Settings" },
   ];
   const [open, setOpen] = useState(true);
+
   return (
     <section className="flex gap-6">
       <div
@@ -52,23 +58,23 @@ function SideBar() {
             </Link>
           ))}
         </div>
-        <div >
-        <Link
-              to="/logout"
-              className="flex items-center text-sm 
+        <div>
+          <button
+            className="flex items-center text-sm 
             font-medium p-2 hover:bg-gray-800 rounded-md"
+            onClick={logout}
+          >
+            <div>
+              <SlLogout className="whitespace-pre duration-500 text-red-600" />
+            </div>
+            <h2
+              className={`whitespace-pre duration-500 text-red-600 ${
+                !open && "opacity-0 translate-x-28 overflow-hidden"
+              }`}
             >
-              <div >
-              <SlLogout className="whitespace-pre duration-500 text-red-600"/>
-              </div>
-              <h2
-                className={`whitespace-pre duration-500 text-red-600 ${
-                  !open && "opacity-0 translate-x-28 overflow-hidden"
-                }`}
-              >
-                Log Out
-              </h2>
-            </Link>
+              Log Out
+            </h2>
+          </button>
         </div>
       </div>
     </section>

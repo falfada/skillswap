@@ -65,7 +65,7 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
     addUser(name: String!, email: String!, password: String!): Auth
     updateUser(name: String!, email: String!): User
-    addSkill(userId: ID!, skill: SkillInput!): User
+    addSkill(skill: SkillInput!): User
     removeSkill(userId: ID!, skillId: ID!): User
     sendMessage(receiverId: ID!, content: String!): Message
     addCalendarEvent(input: CalendarEventInput!): CalendarEvent

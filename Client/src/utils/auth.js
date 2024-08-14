@@ -27,16 +27,16 @@ class AuthService {
     }
     // Retrieve the token from localStorage
     getToken() {
-        return localStorage.getItem('id_token');
+        return localStorage.getItem('token');
     }
     // Save the token to localStorage and redirect to the homepage
     login(idToken) {
-        localStorage.setItem('id_token', idToken);
+        localStorage.setItem('token', idToken);
         window.location.assign('/');
     }
     // Remove the token from localStorage and reset the application state
     logout() {
-        localStorage.removeItem('id_token');
+        localStorage.removeItem('token');
         window.location.assign('/');
     }
 }
