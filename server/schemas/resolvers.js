@@ -3,9 +3,10 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    me: async (parent, { userId }, context) => {
+    me: async (parent, args, context) => {
+      console.log(context.user);
       if (context.user) {
-        return User.findOne({ _id: userId })
+        return User.findOne({ _id: context.user._id })
           .populate("skills")
           .populate("messages")
           .populate("events");
@@ -66,7 +67,7 @@ const resolvers = {
       if (!user) {
         throw AuthenticationError;
       }
-      const verifyPassword = await User.verifyPassword(password);
+      const verifyPassword = await user.verifyPassword(password);
       if (!verifyPassword) {
         throw AuthenticationError;
       }
@@ -80,13 +81,14 @@ const resolvers = {
         throw AuthenticationError;
       }
       const token = signToken(user);
+      console.log(token);
       return { token, user };
     },
-    updateUser: async (parent, { name, email, password }, context) => {
+    updateUser: async (parent, { name, email }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
-          { name, email, password },
+          { name, email },
           { new: true }
         );
       }

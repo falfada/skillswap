@@ -5,6 +5,7 @@ import { ADD_USER } from '../utils/mutation';
 
 export default function SignupPage() {
   const [signupInfo, setSignupInfo] = useState({
+    name: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -14,7 +15,7 @@ export default function SignupPage() {
     onCompleted: (data) => {
       console.log('User signed up:', data);
       // Store the token in local storage or state management library
-      localStorage.setItem('token', data.signup.token);
+      localStorage.setItem('token', data.addUser.token);
       // Redirect to dashboard or homepage
       window.location.href = '/user';
     },
@@ -34,7 +35,7 @@ export default function SignupPage() {
       alert("Passwords do not match!");
       return;
     }
-    signup({ variables: { email: signupInfo.email, password: signupInfo.password } });
+    signup({ variables: { name: signupInfo.name, email: signupInfo.email, password: signupInfo.password } });
   };
 
   return (
@@ -57,6 +58,16 @@ export default function SignupPage() {
                 {error && <div className="text-red-500 text-center mb-4">{error.message}</div>}
                 <form onSubmit={handleSignup}>
                   <p className="mb-4">Create your account</p>
+                  <TEInput
+                    type="name"
+                    label="name"
+                    name="name"
+                    placeholder="Full name"
+                    value={signupInfo.name}
+                    onChange={handleChange}
+                    className="mb-4"
+                    required
+                  ></TEInput>
                   <TEInput
                     type="email"
                     label="Email"

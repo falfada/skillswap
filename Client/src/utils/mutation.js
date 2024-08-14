@@ -7,7 +7,7 @@ export const LOGIN_USER = gql`
       token
       user {
         _id
-        username
+        name
       }
     }
   }
@@ -15,12 +15,12 @@ export const LOGIN_USER = gql`
 
 // Mutation to add a new user (sign-up)
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
+  mutation addUser($name: String!, $email: String!, $password: String!) {
+    addUser(name: $name, email: $email, password: $password) {
       token
       user {
         _id
-        username
+        name
       }
     }
   }
@@ -28,8 +28,8 @@ export const ADD_USER = gql`
 
 // Mutation to update user information
 export const UPDATE_USER = gql`
-  mutation updateUser($name: String!, $email: String!, $password: String!) {
-    updateUser(name: $name, email: $email, password: $password) {
+  mutation updateUser($name: String!, $email: String!) {
+    updateUser(name: $name, email: $email) {
       _id
       name
       email
