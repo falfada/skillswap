@@ -18,6 +18,7 @@
     "@fullcalendar/react": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
     "@react-spring/web": "^9.5.5",
+    "@stripe/react-stripe-js": "^2.7.3",
     "@stripe/stripe-js": "^4.2.0",
     "gapi-script": "^1.2.0",
     "jwt-decode": "^4.0.0",

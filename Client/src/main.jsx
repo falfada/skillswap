@@ -4,6 +4,7 @@ import App from './App.jsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomePage from './pages/HomePage.jsx';
+import About from './pages/AboutPage.jsx';
 import UserHomepage from './Components/UserHomepage/UserHomepage.jsx';
 import Match from './Components/Match/Match.jsx';
 import Chat from "./Components/Chat/Chat.jsx";
@@ -28,6 +29,12 @@ const router = createBrowserRouter([
           path: 'login', // Login page as a child of App
           element: <Login />,
         },
+
+        {
+          path: 'about', // About page as a child of App
+          element: <About />,
+        },
+
         {
           path: 'user', // User-related paths under App
           children: [

@@ -1,41 +1,40 @@
-import React from 'react';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useEffect, useState } from "react";
 
-const stripePromise = loadStripe('YOUR_PUBLIC_STRIPE_KEY');
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
+import { loadStripe } from "@stripe/stripe-js";
 
-export default function Payments() {
-  return (
-    <Elements stripe={stripePromise}>
-      <CheckoutForm />
-    </Elements>
-  );
-}
+function Payment() {
+  const [stripePromise, setStripePromise] = useState(null);
+  const [clientSecret, setClientSecret] = useState("");
 
-function CheckoutForm() {
-  const stripe = useStripe();
-  const elements = useElements();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: elements.getElement(CardElement)
+  useEffect(() => {
+    fetch("/config").then(async (r) => {
+      const { publishableKey } = await r.json();
+      setStripePromise(loadStripe(publishableKey));
     });
+  }, []);
 
-    if (!error) {
-      console.log('Payment successful:', paymentMethod);
-    } else {
-      console.error('Payment error:', error);
-    }
-  };
+  useEffect(() => {
+    fetch("/create-payment-intent", {
+      method: "POST",
+      body: JSON.stringify({}),
+    }).then(async (result) => {
+      var { clientSecret } = await result.json();
+      setClientSecret(clientSecret);
+    });
+  }, []);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement />
-      <button type="submit" disabled={!stripe}>
-        Pay
-      </button>
-    </form>
+    <>
+      <h1>React Stripe and the Payment Element</h1>
+      {clientSecret && stripePromise && (
+        <Elements stripe={stripePromise} options={{ clientSecret }}>
+          <CheckoutForm />
+        </Elements>
+      )}
+    </>
   );
 }
+
+export default Payment;
