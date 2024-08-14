@@ -1,32 +1,50 @@
 import React from "react";
 import "./User.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import { GET_ME } from "../../utils/queries";
+import { UPDATE_USER } from "../../utils/mutation";
 
 function User() {
-  const [formData, setFormData] = useState({
-    user_id: "",
-    fistName: "",
-    lastName: "",
-    email:"",
-    Skill: "",
-    Description: "",
-    url: "",
-    matches: [],
-  });
-  const handleSubmit = () => {
-    console.log("Form submitted");
-  };
-  const handleChange = (e) => {
-    console.log("e", e);
-    const value = e.target.value;
-    const name = e.target.value;
-    console.log("value" + value, "name" + name);
+  const [updateUser, { error }] = useMutation(UPDATE_USER);
 
-    setFormData((preState) => ({
-      ...preState,
-      [name]: value,
-    }));
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setFormData({...formData, [name]:value});
+    // console.log("e", e);
+    // const value = e.target.value;
+    // const name = e.target.value;
+    // console.log("value" + value, "name" + name);
+    // setFormData((preState) => ({
+    //   ...preState,
+    //   [name]: value,
+    // }));
   };
+  const { loading, data } = useQuery(GET_ME);
+
+  console.log(data?.me);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+  });
+
+  useEffect(() => {
+    setFormData({ name: data?.me.name, email: data?.me.email});
+  }, [data]);
+
+  const handleSubmit = async () => {
+    try {
+      console.log("Form submitted");
+      const { data } = await updateUser({
+        variables: { ...formData },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  if (loading) {
+    return <h1>loading</h1>;
+  }
   return (
     <div className="container p-10">
       <form
@@ -34,26 +52,17 @@ function User() {
         className="flex justify-center w-full min-h-screen"
       >
         <section className="flex flex-col p-6 w-1/2">
-          <label htmlFor="firstName"> First Name</label>
+          <label htmlFor="name"> Full Name</label>
           <input
-            id="firstName"
-            name="firstName"
-            placeholder="First Name"
+            id="name"
+            name="name"
+            placeholder="Full Name"
             required={true}
-            value={formData.fistName}
+            value={formData.name}
             type="text"
             onChange={handleChange}
           />
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            id="lastName"
-            name="lastName"
-            placeholder="Last Name"
-            required={true}
-            value={formData.lastName}
-            type="text"
-            onChange={handleChange}
-          />
+
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -64,30 +73,12 @@ function User() {
             type="email"
             onChange={handleChange}
           />
-          <label htmlFor="Skill">Skill</label>
-          <input
-            id="Skill"
-            name="Skill"
-            placeholder="Skill"
-            required={true}
-            value={formData.Skill}
-            type="text"
-            onChange={handleChange}
-          />
-          <label htmlFor="Description">Description</label>
-          <input
-            id="Description"
-            className="h-32"
-            name="Description"
-            placeholder="My skill is..."
-            required={true}
-            value={formData.Deescription}
-            type="text"
-            onChange={handleChange}
-          />
+
+  
+
           <input type="submit" className="bg-blue-600 text-white" />
         </section>
-        <section className="flex flex-col p-6 w-1/2">
+        {/* <section className="flex flex-col p-6 w-1/2">
           <label htmlFor="about">Profile image</label>
           <input
             type="url"
@@ -99,7 +90,7 @@ function User() {
           <div className=" w-full">
             <img src={formData.url} alt="Profile Photo" />
           </div>
-        </section>
+        </section> */}
       </form>
     </div>
   );
