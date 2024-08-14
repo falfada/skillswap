@@ -46,21 +46,21 @@ export default function HomePage() {
   }, []);
 
   return (
-    <section className="w-full bg-gradient-to-r from-pink-300 via-white to-white">
+    <section className="w-full bg-gradient-to-r from-cyan-400 via-white to-white">
       <div className="container mx-auto flex-wrap p-10">
         <div className="text-center my-16 animate-fade-in-down">
-          <h1 className="text-4xl font-bold text-gray-800">
-            Do you have a skill you’d like to share or collaborate on?
+          <h1 className="text-4xl font-bold">
+            Want to share or <br></br>collaborate on a skill?
           </h1>
           <Link to="/signup">
-            <button className="mt-8 px-8 py-3 bg-pink-500 text-white rounded-full shadow-lg transition transform hover:scale-105 hover:shadow-xl">
+            <button className="mt-8 px-8 py-3 bg-green-500 text-950 rounded-full shadow-lg transition transform hover:scale-105 hover:shadow-xl">
               Get started
             </button>
           </Link>
         </div>
 
         <div className="w-full my-16 animate-fade-in-left">
-          <h2 className="text-2xl text-center font-semibold mb-8 text-gray-700">
+          <h2 className="text-2xl text-center font-semibold mb-8 text-950">
             How it works
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -69,22 +69,22 @@ export default function HomePage() {
                 key={index}
                 className="bg-white p-6 rounded-lg shadow-md text-center transition transform hover:scale-105 hover:shadow-lg"
               >
-                <h3 className="text-xl font-bold text-pink-600">{step.step}</h3>
-                <p className="mt-2 text-gray-600">{step.description}</p>
+                <h3 className="text-xl font-bold">{step.step}</h3>
+                <p className="mt-2 text-950">{step.description}</p>
               </div>
             ))}
           </div>
         </div>
 
         <div className="w-full flex flex-wrap justify-center items-center my-16 animate-fade-in-right gap-4">
-          <h2 className="w-full text-center text-2xl font-semibold text-gray-700">
+          <h2 className="w-full text-center text-2xl font-semibold text-950">
             Featured skills
           </h2>
           <div className="w-1/3 flex flex-col gap-4">
             {featuredSkills.map((skill, index) => (
               <div
                 key={index}
-                className="bg-white p-4 rounded-full shadow-md text-center text-pink-500 font-semibold transition transform hover:scale-105 hover:shadow-lg"
+                className="bg-white p-4 rounded-full shadow-md text-center font-semibold transition transform hover:scale-105 hover:shadow-lg"
               >
                 {skill}
               </div>
@@ -96,28 +96,27 @@ export default function HomePage() {
         </div>
 
         <div className="w-full my-16 animate-fade-in-up">
-          <h2 className="text-2xl font-semibold mb-8 text-gray-700">FAQ</h2>
+          <h2 className="text-2xl font-semibold mb-8 text-950">FAQ</h2>
           <div className="space-y-4">
             {faqs.map((faq, index) => (
               <details key={index} className="cursor-pointer bg-white p-4 rounded-lg shadow-md transition transform hover:scale-105 hover:shadow-lg">
                 
-                  <summary className="font-semibold text-pink-600">
+                  <summary className="font-semibold">
                     {faq.question}
                   </summary>
-                  <p className="mt-2 text-gray-600">{faq.answer}</p>
-          
+                  <p className="mt-2 text-950">{faq.answer}</p>
               </details>
             ))}
           </div>
         </div>
       </div>
 
-      <footer className="w-full bg-pink-600 text-white p-10 rounded-t-lg animate-fade-in-up">
-        <div className="flex justify-between">
+      <footer className="w-full bg-cyan-900 text-lime-400 p-5 rounded-t-lg animate-fade-in-up">
+        <div className="flex flex-wrap justify-evenly">
           <div>
-            <h3 className="font-bold">SKILLSWAP</h3>
+            <h3 className="font-bold ">SKILLSWAP</h3><br></br>
             <p>
-              Created by{" "}
+              Created by{" "} <br></br>
               <a href="https://github.com/ANDRESGOM77" target="_blank" rel="noopener noreferrer">
                 Andres,
               </a>{" "}
@@ -127,19 +126,21 @@ export default function HomePage() {
               {" "}&{" "} 
               <a href="https://github.com/SoniiPP" target="_blank" rel="noopener noreferrer">Soni</a>
             </p>
-            <p>Copyright {currentYear}</p>
+            <p> &copy;{currentYear}</p>
+          </div>
+  
+          <div>
+            <h3 className="font-bold">Quick Links</h3><br></br>
+            <p><a href="http://localhost:5173">Home</a></p>
+            <p><a href="https://github.com/falfada/skillswap" target="_blank">GitHub Repository</a></p>
           </div>
           <div>
-            <h3 className="font-bold">Quick Links</h3>
-            <p>Home</p>
+            <h3 className="font-bold">Social</h3><br></br>
+            <p><a href="http://instagram.com" target="_blank">Instagram</a></p>
+            <p><a href="http://facebook.com" target="_blank">Facebook</a></p>
           </div>
           <div>
-            <h3 className="font-bold">Social</h3>
-            <p>Instagram</p>
-            <p>Facebook</p>
-          </div>
-          <div>
-            <h3 className="font-bold">Contact Us</h3>
+            <h3 className="font-bold">Contact Us</h3><br></br>
             <p>info@skillswap.com</p>
             <p>0412 345 678</p>
           </div>
