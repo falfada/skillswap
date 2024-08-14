@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { TEInput, TERipple } from 'tw-elements-react';
-import { SIGNUP_USER } from '../utils/mutation';
+import { ADD_USER } from '../utils/mutation';
 
 export default function SignupPage() {
   const [signupInfo, setSignupInfo] = useState({
@@ -10,7 +10,7 @@ export default function SignupPage() {
     confirmPassword: '',
   });
 
-  const [signup, { error, loading }] = useMutation(SIGNUP_USER, {
+  const [signup, { error, loading }] = useMutation(ADD_USER, {
     onCompleted: (data) => {
       console.log('User signed up:', data);
       // Store the token in local storage or state management library
@@ -61,6 +61,7 @@ export default function SignupPage() {
                     type="email"
                     label="Email"
                     name="email"
+                    placeholder="Email"
                     value={signupInfo.email}
                     onChange={handleChange}
                     className="mb-4"
@@ -70,6 +71,7 @@ export default function SignupPage() {
                     type="password"
                     label="Password"
                     name="password"
+                    placeholder="Password"
                     value={signupInfo.password}
                     onChange={handleChange}
                     className="mb-4"
@@ -79,6 +81,7 @@ export default function SignupPage() {
                     type="password"
                     label="Confirm Password"
                     name="confirmPassword"
+                    placeholder="Confirm Password"
                     value={signupInfo.confirmPassword}
                     onChange={handleChange}
                     className="mb-6"
