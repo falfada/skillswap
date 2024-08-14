@@ -1,0 +1,151 @@
+/* Main Calendar Wrapper */
+.booking-calendar {
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  /* Calendar Header Toolbar */
+  .fc .fc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .fc .fc-toolbar h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .fc .fc-toolbar button {
+    background-color: #ff6b6b;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .fc .fc-toolbar button:hover {
+    background-color: #ff4f4f;
+  }
+  
+  .fc .fc-toolbar button:focus {
+    outline: none;
+  }
+  
+  /* Calendar Day Cells */
+  .fc .fc-daygrid-day {
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+  
+  .fc .fc-daygrid-day:hover {
+    background-color: #f1f3f5;
+  }
+  
+  /* Calendar Event Styles */
+  .fc .fc-event {
+    background-color: #ff6b6b;
+    border: 1px solid #ff4f4f;
+    color: white;
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-size: 0.85rem;
+  }
+  
+  .fc .fc-event:hover {
+    background-color: #ff4f4f;
+    cursor: pointer;
+  }
+  
+  /* Selected Date Range */
+  .fc .fc-daygrid-bg .fc-highlight {
+    background-color: rgba(255, 107, 107, 0.2);
+  }
+  
+  /* Current Date Highlight */
+  .fc .fc-day-today {
+    background-color: rgba(255, 107, 107, 0.1);
+    border: 2px solid #ff6b6b;
+  }
+  
+  /* Event Popover */
+  .fc-popover {
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+  
+  .fc-popover-header {
+    background-color: #ff6b6b;
+    color: white;
+    border-bottom: 1px solid #ff4f4f;
+  }
+  
+  .fc-popover-close {
+    color: white;
+    cursor: pointer;
+  }
+  
+  .fc-popover-body {
+    padding: 10px;
+  }
+  
+  /* Weekday Header */
+  .fc .fc-col-header-cell {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 10px 0;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-radius: 4px;
+  }
+  
+  /* Calendar TimeGrid (for week/day view) */
+  .fc .fc-timegrid-slot {
+    height: 1.5rem;
+    background-color: #f8f9fa;
+  }
+  
+  .fc .fc-timegrid-slot:hover {
+    background-color: #f1f3f5;
+  }
+  
+  .fc .fc-timegrid-event {
+    background-color: #ff6b6b;
+    border: 1px solid #ff4f4f;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+  
+  .fc .fc-timegrid-event:hover {
+    background-color: #ff4f4f;
+  }
+  
+  /* Custom Scrollbar for Popover */
+  .fc .fc-popover-body {
+    overflow-y: auto;
+  }
+  
+  .fc .fc-popover-body::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .fc .fc-popover-body::-webkit-scrollbar-track {
+    background: #f8f9fa;
+  }
+  
+  .fc .fc-popover-body::-webkit-scrollbar-thumb {
+    background-color: #ff6b6b;
+    border-radius: 4px;
+  }
+  

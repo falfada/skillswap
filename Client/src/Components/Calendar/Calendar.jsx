@@ -4,6 +4,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
+import { ListItem, ListItemText } from '@mui/material';
+
 
 const Calendar = () => {
   const [currentEvents, setCurrentEvents] = useState([]);
@@ -31,6 +33,7 @@ const Calendar = () => {
     ) {
       selected.event.remove();
     }
+
   };
   return (
     <div className="flex justify-between">
@@ -39,6 +42,7 @@ const Calendar = () => {
         <div>
           {currentEvents.map((event) => (
               <div
+
                 key={event.id}
                 className="bg-green-500 my-2.5 rounded-2"
               >
