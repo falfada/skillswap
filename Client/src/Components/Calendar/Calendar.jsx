@@ -33,66 +33,68 @@ const Calendar = () => {
     ) {
       selected.event.remove();
     }
-    }
-    return (
-      <div className="flex justify-between">
-        <div className=" flex-1 basis-[20%] bg-orange-200 p-15 rounded-2-sm">
-          <h5>Events</h5>
-          <div>
-            {currentEvents.map((event) => (
-              <ListItem
+
+  };
+  return (
+    <div className="flex justify-between">
+      <div className=" flex-1 basis-[20%] bg-orange-200 p-15 rounded-2-sm">
+        <h5>Events</h5>
+        <div>
+          {currentEvents.map((event) => (
+              <div
+
                 key={event.id}
                 className="bg-green-500 my-2.5 rounded-2"
               >
-                <ListItemText
-                  primary={eventTupleToStore.title}
+                <div
+                  primary={event.title}
                   secondary={
-                    <Typography>
+                    <div>
                       {formatDate(event.start, {
                         year: "numeric",
                         month: "2-digit",
                         day: "numeric",
                       })}
-                    </Typography>
+                    </div>
                   }
-                ></ListItemText>
-              </ListItem>
-            ))}
-          </div>
-        </div>
-        <div className="flex-1 basis-[100%] ml-3.5">
-          <FullCalendar
-            plugins={[
-              dayGridPlugin,
-              timeGridPlugin,
-              listPlugin,
-              interactionPlugin,
-            ]}
-            initialView="dayGridMonth"
-            headerToolbar={{
-              start: "today prev,next",
-              center: "title",
-              end: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
-            }}
-            height={"75vh"}
-            editable={true}
-            selectable={true}
-            selectMirror={true}
-            dayMaxEvents={true}
-            select={handleDateClick}
-            eventClick={handleEventClick}
-            eventsSet={(events) => setCurrentEvents(events)}
-            initialEvents={[
-              {
-                id: "1234",
-                title: "Bootcamp",
-                start: "2024-02-25",
-                end: "2024-08-15",
-              },
-            ]}
-          />
+                ></div>
+              </div>
+          ))} 
         </div>
       </div>
-    );
-  };
+      <div className="min-h-screen w- w-full ml-3.5">
+        <FullCalendar
+          plugins={[
+            dayGridPlugin,
+            timeGridPlugin,
+            listPlugin,
+            interactionPlugin,
+          ]}
+          initialView="dayGridMonth"
+          headerToolbar={{
+            start: "today prev,next",
+            center: "title",
+            end: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+          }}
+          height={"85vh"}
+          editable={true}
+          selectable={true}
+          selectMirror={true}
+          dayMaxEvents={true}
+          select={handleDateClick}
+          eventClick={handleEventClick}
+          eventsSet={(events) => setCurrentEvents(events)}
+          initialEvents={[
+            {
+              id: "1234",
+              title: "Bootcamp",
+              start: "2024-02-25",
+              end: "2024-08-15",
+            },
+          ]}
+        />
+      </div>
+    </div>
+  );
+};
 export default Calendar;
