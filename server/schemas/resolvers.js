@@ -94,14 +94,14 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    addSkill: async (parent, { userId, skill }, context) => {
+    addSkill: async (parent, { skill }, context) => {
       if (context.user) {
         let skillDoc = await Skill.findOne(skill);
         if (!skillDoc) {
           skillDoc = await Skill.create(skill);
         }
 
-        await User.findByIdAndUpdate(userId, {
+        await User.findByIdAndUpdate(context.user._id, {
           $addToSet: { skills: skillDoc._id },
         });
 
