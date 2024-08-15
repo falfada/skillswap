@@ -6,8 +6,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomePage from './pages/HomePage.jsx';
 import UserHomepage from './Components/UserHomepage/UserHomepage.jsx';
 import Match from './Components/Match/Match.jsx';
+import Calendar from './Components/Calendar/Calendar.jsx';
 import Chat from "./Components/Chat/Chat.jsx";
 import User from './Components/User/User.jsx';
+import AboutPage from './pages/AboutPage.jsx';
 import Signup from './pages/SignUpPage.jsx'; // Import the Signup component
 import Login from './pages/LoginPage.jsx'; // Import the Login component
 const router = createBrowserRouter([
@@ -19,6 +21,10 @@ const router = createBrowserRouter([
         {
           index: true, // Default child route renders HomePage
           element: <HomePage />,
+        },
+        {
+          path: 'about',
+          element: <AboutPage/>
         },
         {
           path: 'signup', // Signup page as a child of App
@@ -47,10 +53,10 @@ const router = createBrowserRouter([
               path: 'profile',
               element: <User />,
             },
-            // {
-            //   path: 'logout',
-            //   element: <HomePage />,
-            // }
+            {
+              path: 'calendar',
+              element: <Calendar/>
+            }
           ],
         },
       ],

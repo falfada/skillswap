@@ -5,23 +5,30 @@ import { UPDATE_USER, ADD_SKILL, REMOVE_SKILL } from "../../utils/mutation";
 import "./User.css";
 
 function User() {
-  const [updateUser, { error }] = useMutation(UPDATE_USER);
-  const [addSkill, { error: errorSkill }] = useMutation(ADD_SKILL, {
-    onError: (error) => console.error("Error adding skill:", error),
+  const [updateUser, { error: updateError }] = useMutation(UPDATE_USER);
+  const [addSkill, { error: addSkillError }] = useMutation(ADD_SKILL, {
+    onError: (error) => {
+      console.error("Error adding skill:", error);
+      console.error("Error details:", error.graphQLErrors);
+    },
     onCompleted: () => {
       setSuccessMessage("Skill added successfully!");
       refetch();
-    }
+    },
   });
-  const [removeSkill, { error: errorRemoveSkill }] = useMutation(REMOVE_SKILL, {
-    onError: (error) => console.error("Error removing skill:", error),
+  const [removeSkill, { error: removeSkillError }] = useMutation(REMOVE_SKILL, {
+    onError: (error) => {
+      console.error("Error removing skill:", error.message);
+      console.error("Error details:", error.graphQLErrors);
+    },
     onCompleted: () => {
       setSuccessMessage("Skill removed successfully!");
       refetch();
-    }
+    },
   });
 
   const { loading, data, refetch } = useQuery(GET_ME);
+  console.log(data?.me);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,6 +36,8 @@ function User() {
   const [skillInput, setSkillInput] = useState({
     skill: "",
     category: "",
+    hasSkill: false,
+    wantsToLearn: false,
   });
   const [skills, setSkills] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
@@ -47,50 +56,70 @@ function User() {
 
   const handleSkillChange = (e) => {
     const { name, value } = e.target;
-    setSkillInput({ ...skillInput, [name]: value });
+
+    if (name === "hasSkill" || name === "wantsToLearn") {
+      setSkillInput({ ...skillInput, [name]: e.target.checked });
+    } else {
+      setSkillInput({ ...skillInput, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Form submitted");
       await updateUser({
         variables: { ...formData },
       });
     } catch (err) {
-      console.error(err);
+      console.error("Error updating user:", err);
     }
   };
 
   const handleSkillSubmit = async (e) => {
     e.preventDefault();
-    
+
+    console.log("skillInput:", skillInput);
+
     if (!skillInput.skill.trim() || !skillInput.category.trim()) {
       console.error("Skill and category are required.");
       return;
     }
-    
+
     try {
-      console.log("Skill Input:", skillInput);
       await addSkill({
-        variables: { skill: skillInput },
+        variables: {
+          input: {
+            skill: skillInput.skill,
+            category: skillInput.category,
+            hasSkill: skillInput.hasSkill,
+            wantsToLearn: skillInput.wantsToLearn,
+          },
+        },
       });
-      setSkillInput({ skill: "", category: "" });
+      setSkillInput({
+        skill: "",
+        category: "",
+        hasSkill: false,
+        wantsToLearn: false,
+      });
     } catch (err) {
-      console.error("Error adding skill:", err);
+      console.error("Error adding skill:", err.message);
     }
   };
 
   const handleRemoveSkill = async (skillId) => {
+    console.log(skillId);
     try {
       await removeSkill({
-        variables: { skillId }
+        variables: { skillId },
       });
     } catch (err) {
       console.error("Error removing skill:", err);
     }
-  }
-  
+  };
+
+  console.log(skills);
+
   if (loading) {
     return <h1>Loading...</h1>;
   }
@@ -124,9 +153,11 @@ function User() {
             onChange={handleChange}
           />
 
-  
-
-          <input type="submit" value="Update" className="bg-cyan-950 text-white" />
+          <input
+            type="submit"
+            value="Update"
+            className="bg-cyan-950 text-white"
+          />
         </section>
       </form>
 
@@ -154,7 +185,33 @@ function User() {
             onChange={handleSkillChange}
           />
 
-          <input type="submit" value="Add Skill" className="bg-blue-600 text-white" />
+          <label>Type</label>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                name="hasSkill"
+                checked={skillInput.hasSkill}
+                onChange={handleSkillChange}
+              />
+              Have
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="wantsToLearn"
+                checked={skillInput.wantsToLearn}
+                onChange={handleSkillChange}
+              />
+              Want to Learn
+            </label>
+          </div>
+
+          <input
+            type="submit"
+            value="Add Skill"
+            className="bg-blue-600 text-white"
+          />
         </section>
       </form>
 
@@ -165,9 +222,9 @@ function User() {
       <section className="p-6 w-full">
         <h2>Your Skills</h2>
         <ul>
-          {skills.map((skill) => (
-            <li key={skill._id} onClick={() => handleRemoveSkill(skill._id)}>
-              {skill.skill}
+          {skills.map((skill, index) => (
+            <li key={index} onClick={() => handleRemoveSkill(skill._id)}>
+              Skill
             </li>
           ))}
         </ul>

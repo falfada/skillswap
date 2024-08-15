@@ -1,20 +1,17 @@
 import { useState } from "react";
-import FullCalendar, { formatDate } from "@fullcalendar/react";
+import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
+import { formatDate } from "@fullcalendar/core"; // Correct import for formatDate
 import { ListItem, ListItemText } from '@mui/material';
-
-
 const Calendar = () => {
   const [currentEvents, setCurrentEvents] = useState([]);
-
   const handleDateClick = (selected) => {
-    const title = prompt("please enter a new title for your event");
+    const title = prompt("Please enter a new title for your event");
     const calendarApi = selected.view.calendar;
     calendarApi.unselect();
-
     if (title) {
       calendarApi.addEvent({
         id: `${selected.dateStr}-${title}`,
@@ -28,41 +25,32 @@ const Calendar = () => {
   const handleEventClick = (selected) => {
     if (
       window.confirm(
-        `Are you sure you want to delete the event '${selected.event.title}`
+        `Are you sure you want to delete the event '${selected.event.title}'`
       )
     ) {
       selected.event.remove();
     }
-
   };
   return (
     <div className="flex justify-between">
-      <div className=" flex-1 basis-[20%] bg-orange-200 p-15 rounded-2-sm">
+      <div className="flex-1 basis-[20%] bg-orange-200 p-15 rounded-2-sm">
         <h5>Events</h5>
         <div>
           {currentEvents.map((event) => (
-              <div
-
-                key={event.id}
-                className="bg-green-500 my-2.5 rounded-2"
-              >
-                <div
-                  primary={event.title}
-                  secondary={
-                    <div>
-                      {formatDate(event.start, {
-                        year: "numeric",
-                        month: "2-digit",
-                        day: "numeric",
-                      })}
-                    </div>
-                  }
-                ></div>
-              </div>
-          ))} 
+            <ListItem key={event.id} className="bg-green-500 my-2.5 rounded-2">
+              <ListItemText
+                primary={event.title}
+                secondary={formatDate(event.start, {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "numeric",
+                })}
+              />
+            </ListItem>
+          ))}
         </div>
       </div>
-      <div className="min-h-screen w- w-full ml-3.5">
+      <div className="min-h-screen w-full ml-3.5">
         <FullCalendar
           plugins={[
             dayGridPlugin,

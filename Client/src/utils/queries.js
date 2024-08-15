@@ -8,8 +8,13 @@ export const GET_ME = gql`
       name
       email
       skills {
-        _id
-        skill
+        skill {
+          _id
+          skill
+          category
+        }
+        hasSkill
+        wantsToLearn
       }
       messages {
         _id
