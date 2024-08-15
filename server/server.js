@@ -24,8 +24,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // static file serving: serves static files from the client/dist directory
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../Client/dist')));
 
-// Routes for HTML Files:
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../Client/dist/index.html'));
+  });
+} 
 
 const startApolloServer = async () => {
   await server.start();
@@ -38,10 +43,6 @@ const startApolloServer = async () => {
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
   }));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../Client/dist/index.html'));
-  })
 
 
   db.once('open', () => {
