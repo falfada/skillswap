@@ -29,7 +29,7 @@ function SideBar() {
   return (
     <section className="flex gap-6">
       <div
-        className={`bg-[#083344]  ${
+        className={`bg-[#083344]  h-screen ${
           open ? "w-72" : "w-16"
         } duration-500 text-gray-100 px-4`}
       >

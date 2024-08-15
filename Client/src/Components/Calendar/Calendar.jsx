@@ -32,7 +32,7 @@ const Calendar = () => {
     }
   };
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between w-9/12">
       <div className="flex-1 basis-[20%] bg-orange-200 p-15 rounded-2-sm">
         <h5>Events</h5>
         <div>

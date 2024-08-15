@@ -125,7 +125,7 @@ function User() {
   }
 
   return (
-    <div className="container flex-wrap p-10">
+    <div className="container flex-wrap p-10 w-9/12">
       <form
         onSubmit={handleSubmit}
         className="w-1/2 flex justify-center min-h-screen"
