@@ -40,7 +40,7 @@ const AboutPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-cyan-400 to-white to-white p-5">
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-r from-cyan-400 to-white to-white p-5">
       <div className="max-w-lg w-full bg-white rounded-lg shadow-lg p-8">
         <h1 className="text-2xl text-sky-950 font-bold text-center mb-4">About Us</h1>
         <p className="text-center text-sky-950 mb-4">This platform allows you to exchange skills with others.</p>
