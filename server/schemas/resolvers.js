@@ -31,20 +31,39 @@ const resolvers = {
 
       return Skill.find(searchCriteria).populate("users");
     },
-    skillMatch: async (parent, { oferredId, learnerId }, context) => {
+    getMatches: async (parent, args, context) => {
       if (context.user) {
-        const offerer = await User.findById(oferredId);
-        const learner = await User.findById(learnerId);
+        const currentUser = await User.findById(context.users._id).populate(
+          "skills.skill"
+        );
+        const users = await User.find().populate("skills.skill");
+        const matches = [];
 
-        if (!offerer || !learner) {
-          throw AuthenticationError;
-        }
-        return User.find({
-          _id: { $ne: oferredId },
-          skilss: { $in: offerer.skills },
+        users.forEach((otherUser) => {
+          if (currentUser.id !== otherUser.id) {
+            const matchedSkills = currentUser.skills
+              .filter(
+                (userSkill) =>
+                  userSkill.wantsToLearn &&
+                  otherUser.skills.some(
+                    (otherSkill) =>
+                      otherSkill.skill.id === userSkill.skill.id &&
+                      otherSkill.hasSkill
+                  )
+              )
+              .map((userSkill) => userSkill.skill);
+
+            if (matchedSkills.length > 0) {
+              matches.push({
+                user: otherUser,
+                matchedSkills,
+              });
+            }
+          }
         });
+
+        return matches;
       }
-      throw AuthenticationError;
     },
     getMessages: async (parent, { userId }, context) => {
       if (context.user) {
@@ -132,9 +151,11 @@ const resolvers = {
       }
       console.log(context.user);
       if (context.user) {
+        
         try {
           const newSkill = await Skill.create({
-            skill, category
+            skill,
+            category,
           });
 
           const updatedUser = await User.findByIdAndUpdate(
@@ -159,13 +180,13 @@ const resolvers = {
       throw AuthenticationError;
     },
     removeSkill: async (parent, args, context) => {
-      console.log('Arguments received:', args);
+      console.log("Arguments received:", args);
       const { skillId } = args;
-    
+
       if (!skillId) {
-        throw new Error('Skill ID is required');
+        throw new Error("Skill ID is required");
       }
-    
+
       if (context.user) {
         try {
           const updatedUser = await User.findByIdAndUpdate(
@@ -173,13 +194,13 @@ const resolvers = {
             { $pull: { skills: { skill: skillId } } },
             { new: true }
           ).populate("skills.skill");
-    
+
           await Skill.findByIdAndUpdate(
             skillId,
             { $pull: { users: context.user._id } },
             { new: true }
           );
-    
+
           return updatedUser;
         } catch (error) {
           console.error("Error removing skill:", error);

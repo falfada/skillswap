@@ -149,7 +149,6 @@ export const GET_CALENDAR_EVENTS = gql`
   }
 `;
 
-
 // Query to initiate a Stripe checkout session
 export const QUERY_CHECKOUT = gql`
   query getCheckout($donation: Int!) {
@@ -158,6 +157,25 @@ export const QUERY_CHECKOUT = gql`
     }
   }
 `;
-// TODO: Add SkillMatch Query
 
-
+export const GET_MATCHES = gql`
+  query GetMatches {
+    getMatches {
+      user {
+        _id
+        email
+        name
+        skills {
+          skill {
+            skill
+          }
+          hasSkill
+          wantsToLearn
+        }
+      }
+      matchedSkills {
+        skill
+      }
+    }
+  }
+`;

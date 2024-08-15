@@ -22,6 +22,11 @@ const typeDefs = `
     
   }
 
+  type Match{
+    user: User
+    matchedSkills: [Skill]
+  }
+
   type Auth{
     token: ID!
     user: User
@@ -67,7 +72,7 @@ const typeDefs = `
     getSkills: [Skill]
     getSingleSkill(skillId: ID!): Skill 
     searchSkills(category: String, skill: String): [Skill]
-    skillMatch(offererId: ID!, learnerId: ID!): [User]
+    getMatches: [Match]
     getMessages(userId: ID!): [Message]
     getCalendarEvents: [CalendarEvent]
     checkout(donation: Int): Checkout
