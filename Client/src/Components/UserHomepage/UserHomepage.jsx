@@ -7,33 +7,33 @@ function UserHomepage() {
   const [characters, setCharacters] = useState([
     {
       name: "Richard Hendricks",
-      url: "./img/richard.jpg",
+      url: "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F774909%2Fpexels-photo-774909.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D1260%26h%3D750%26dpr%3D2",
       skill: "carpintero",
       description: "soy carpintero",
     },
     {
       name: "Erlich Bachman",
-      url: "./img/erlich.jpg",
-      skill: "carpintero",
-      description: "soy carpintero",
+      url: "https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      skill: "dance",
+      description: "i've been dacing my whole life",
     },
     {
       name: "Monica Hall",
-      url: "./img/monica.jpg",
-      skill: "carpintero",
-      description: "soy carpintero",
+      url: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      skill: "football player",
+      description: "profesional football player",
     },
     {
       name: "Jared Dunn",
-      url: "./img/jared.jpg",
-      skill: "carpintero",
-      description: "soy carpintero",
+      url: "https://images.pexels.com/photos/2709388/pexels-photo-2709388.jpeg",
+      skill: "sing",
+      description: "i play in a jazz band",
     },
     {
       name: "Dinesh Chugtai",
-      url: "./img/dinesh.jpg",
-      skill: "carpintero",
-      description: "soy carpintero",
+      url: "https://images.pexels.com/photos/3094215/pexels-photo-3094215.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      skill: "programer",
+      description: "i'm a developer of apps",
     },
   ]);
 

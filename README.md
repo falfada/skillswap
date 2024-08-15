@@ -6,15 +6,15 @@
 ## Github Repo & Deployed Links 
 
 ### Table of Contents:
-Description
-Directory Structure
-User Story
-Acceptance Criteria
-Appearance & Functionality
-Contributions
-Credits
-License
-Author
+
+- [Description](#Description)
+- [Images](#images)
+- [Installation](#installation)
+- [Usage](#Usage)
+- [links](#links)
+- [Technologies Usage](#technologies-usage)
+- [Contributing](#contributing)
+- [License](#license)
 
 ### Directory Structure
 ├── skillswap
