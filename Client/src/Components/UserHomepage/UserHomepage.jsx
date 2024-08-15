@@ -14,26 +14,26 @@ function UserHomepage() {
     {
       name: "Erlich Bachman",
       url: "https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      skill: "carpintero",
-      description: "soy carpintero",
+      skill: "dance",
+      description: "i've been dacing my whole life",
     },
     {
       name: "Monica Hall",
       url: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      skill: "carpintero",
-      description: "soy carpintero",
+      skill: "football player",
+      description: "profesional football player",
     },
     {
       name: "Jared Dunn",
       url: "https://images.pexels.com/photos/2709388/pexels-photo-2709388.jpeg",
-      skill: "carpintero",
-      description: "soy carpintero",
+      skill: "sing",
+      description: "i play in a jazz band",
     },
     {
       name: "Dinesh Chugtai",
       url: "https://images.pexels.com/photos/3094215/pexels-photo-3094215.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      skill: "carpintero",
-      description: "soy carpintero",
+      skill: "programer",
+      description: "i'm a developer of apps",
     },
   ]);
 
