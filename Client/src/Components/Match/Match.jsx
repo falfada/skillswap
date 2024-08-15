@@ -66,7 +66,7 @@ function Match() {
 // ))}
 //       </div>
 //       </div>
-    <div className="flex mt-4 ml-4 gap-1 container mx-auto">
+    <div className="w-9/12 flex mt-4 ml-4 gap-1 container mx-auto">
       {" "}
       {/* Added space before 'container' */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bor">
