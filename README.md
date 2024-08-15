@@ -76,7 +76,27 @@ git clone https://github.com/falfada/skillswap.git
 
 ## Images
 
+Home webpage
+![app_homepage](/Client/public/favs/homepage.png "app home page")
+![app_homepage](/Client/public/favs/homepage2.png "app home page")
+
+Log-in form
+![app_login](/Client/public/favs/loginForm.png "app login form")
+
+User Home page
+![app_user_home](/Client/public/favs/userHomepage.png "app user home page")
+
+Match
+![app_match](/Client/public/favs/matches.png "app match")
+
+Calendar
+![app_calendar](/Client/public/favs/calendar.png "app calendar")
+
+Update User
+![app_update_user](/Client/public/favs/UpdateUser.png "app update user")
+
 ## links
+
 
 ## Contributions & Credits
 
