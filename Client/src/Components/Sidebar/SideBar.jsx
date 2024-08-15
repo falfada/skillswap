@@ -8,7 +8,7 @@ import { CiCalendar } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { CiSettings } from "react-icons/ci";
 import { SlLogout } from "react-icons/sl";
-import logo from '../Logo/SkillSwapLOGO.png';
+import logo from "../Logo/SkillSwapLOGO.png";
 import Auth from "../../utils/auth";
 
 function SideBar() {
@@ -20,7 +20,7 @@ function SideBar() {
   const menus = [
     { name: "Home", icon: FaHome, link: "/" },
     { name: "Match", icon: MdOutlineConnectWithoutContact, link: "user/Match" },
-    { name: "chat", icon: IoChatboxEllipsesOutline, link: "user/Chat" },
+    // { name: "chat", icon: IoChatboxEllipsesOutline, link: "user/Chat" },
     { name: "Calendar", icon: CiCalendar, link: "user/Calendar" },
     { name: "User", icon: CiUser, link: "user/profile" },
   ];
@@ -33,7 +33,18 @@ function SideBar() {
           open ? "w-72" : "w-16"
         } duration-500 text-gray-100 px-4`}
       >
-              <img src={logo} alt="Skillswap's Logo" className="logo " style={{ display: 'flex', margin:'5px', paddingTop: '10px', width: '100px', height: 'auto' }} />
+        <img
+          src={logo}
+          alt="Skillswap's Logo"
+          className="logo "
+          style={{
+            display: "flex",
+            margin: "5px",
+            paddingTop: "10px",
+            width: "100px",
+            height: "auto",
+          }}
+        />
 
         <div className="py-3 flex justify-end">
           <GiHamburgerMenu
@@ -62,22 +73,22 @@ function SideBar() {
           ))}
         </div>
 
-        <div >
-        <Link
-              to="/logout"
-              className="flex items-center text-sm p-2 ext-center bg-green-700 text-950 py-2 rounded-lg font-semibold mt-4 hover:bg-green-500 focus:scale-95 transition-all duration-200 ease-out"
+        <div>
+          <button
+            className="flex items-center text-sm p-2 ext-center bg-green-700 text-950 py-2 rounded-lg font-semibold mt-4 hover:bg-green-500 focus:scale-95 transition-all duration-200 ease-out"
+            onClick={logout}
+          >
+            <div>
+              <SlLogout className="whitespace-pre duration-500 text-950" />
+            </div>
+            <h2
+              className={`whitespace-pre duration-500 text-950 ${
+                !open && "opacity-0 translate-x-28 overflow-hidden"
+              }`}
             >
-              <div >
-              <SlLogout className="whitespace-pre duration-500 text-950"/>
-              </div>
-              <h2
-                className={`whitespace-pre duration-500 text-950 ${
-                  !open && "opacity-0 translate-x-28 overflow-hidden"
-                }`}
-              >
-                Log Out
-              </h2>
-            </Link>
+              Log Out
+            </h2>
+          </button>
         </div>
       </div>
     </section>

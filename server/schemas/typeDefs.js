@@ -5,16 +5,26 @@ const typeDefs = `
     name: String
     email: String
     password: String
-    skills: [Skill]
+    skills: [UserSkill]
     messages: [Message]
     events: [CalendarEvent]
     }
+  type UserSkill{
+    skill: Skill
+    hasSkill: Boolean
+    wantsToLearn: Boolean
+  }
 
   type Skill{
     _id: ID
     category: String
     skill: String
     
+  }
+
+  type Match{
+    user: User
+    matchedSkills: [Skill]
   }
 
   type Auth{
@@ -42,6 +52,8 @@ const typeDefs = `
   input SkillInput {
     skill: String!
     category: String!
+    hasSkill: Boolean
+    wantsToLearn: Boolean
   }
 
   input CalendarEventInput {
@@ -60,7 +72,7 @@ const typeDefs = `
     getSkills: [Skill]
     getSingleSkill(skillId: ID!): Skill 
     searchSkills(category: String, skill: String): [Skill]
-    skillMatch(offererId: ID!, learnerId: ID!): [User]
+    getMatches: [Match]
     getMessages(userId: ID!): [Message]
     getCalendarEvents: [CalendarEvent]
     checkout(donation: Int): Checkout
@@ -71,7 +83,7 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
     addUser(name: String!, email: String!, password: String!): Auth
     updateUser(name: String!, email: String!): User
-    addSkill(skill: SkillInput!): Skill
+    addSkill(input: SkillInput!): User
     removeSkill(skillId: ID!): User
     sendMessage(receiverId: ID!, content: String!): Message
     addCalendarEvent(input: CalendarEventInput!): CalendarEvent

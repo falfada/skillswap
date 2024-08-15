@@ -1,6 +1,6 @@
 const { User, Skill, Message, Calendar } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
 const resolvers = {
   Query: {
@@ -26,25 +26,44 @@ const resolvers = {
         searchCriteria.category = category;
       }
       if (skill) {
-        searchCriteria.skill = new RegExp(skill, 'i');
+        searchCriteria.skill = new RegExp(skill, "i");
       }
 
-      return Skill.find(searchCriteria).populate('users');
+      return Skill.find(searchCriteria).populate("users");
     },
-    skillMatch: async (parent, { oferredId, learnerId }, context) => {
+    getMatches: async (parent, args, context) => {
       if (context.user) {
-        const offerer = await User.findById(oferredId);
-        const learner = await User.findById(learnerId);
+        const currentUser = await User.findById(context.users._id).populate(
+          "skills.skill"
+        );
+        const users = await User.find().populate("skills.skill");
+        const matches = [];
 
-        if (!offerer || !learner) {
-          throw AuthenticationError;
-        }
-        return User.find({
-          _id: { $ne: oferredId },
-          skilss: { $in: offerer.skills },
+        users.forEach((otherUser) => {
+          if (currentUser.id !== otherUser.id) {
+            const matchedSkills = currentUser.skills
+              .filter(
+                (userSkill) =>
+                  userSkill.wantsToLearn &&
+                  otherUser.skills.some(
+                    (otherSkill) =>
+                      otherSkill.skill.id === userSkill.skill.id &&
+                      otherSkill.hasSkill
+                  )
+              )
+              .map((userSkill) => userSkill.skill);
+
+            if (matchedSkills.length > 0) {
+              matches.push({
+                user: otherUser,
+                matchedSkills,
+              });
+            }
+          }
         });
+
+        return matches;
       }
-      throw AuthenticationError;
     },
     getMessages: async (parent, { userId }, context) => {
       if (context.user) {
@@ -56,7 +75,7 @@ const resolvers = {
     },
     getCalendarEvents: async (parent, args, context) => {
       if (context.user) {
-        return Calendar.find().populate('user');
+        return Calendar.find().populate("user");
       }
       throw AuthenticationError;
     },
@@ -65,24 +84,22 @@ const resolvers = {
 
       const line_items = [];
 
-
       line_items.push({
         price_data: {
-          currency: 'usd',
+          currency: "usd",
           product_data: {
-            name: 'Donation',
-            description: 'Support our platform',
+            name: "Donation",
+            description: "Support our platform",
           },
           unit_amount: donation * 100, // amount in cents
         },
         quantity: 1,
       });
 
-
       const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
+        payment_method_types: ["card"],
         line_items,
-        mode: 'payment',
+        mode: "payment",
         success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${url}/`,
       });
@@ -124,54 +141,73 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    addSkill: async (parent, { skill }, context) => {
-      if (context.user) {
-        if (!skill || !skill.skill || !skill.category) {
-          throw new Error('Invalid skill input');
-        }
-  
-        let skillDoc = await Skill.findOne({ skill: skill.skill, category: skill.category });
-        if (!skillDoc) {
-          skillDoc = await Skill.create(skill);
-        }
-  
-        const updatedUser = await User.findByIdAndUpdate(
-          context.user._id,
-          { $addToSet: { skills: skillDoc._id } },
-          { new: true } 
-        ).populate('skills');
+    addSkill: async (parent, { input }, context) => {
+      // console.log('input: ', input); // Log skillInput for inspection
+      const { skill, category, hasSkill, wantsToLearn } = input;
 
-  
-        if (!updatedUser) {
-          throw new Error('User not found');
+      if (!skillInput || !skillInput.skill) {
+        console.error("skillInput or skillInput.skill is undefined");
+        return; // Or handle the error appropriately
+      }
+      console.log(context.user);
+      if (context.user) {
+        
+        try {
+          const newSkill = await Skill.create({
+            skill,
+            category,
+          });
+
+          const updatedUser = await User.findByIdAndUpdate(
+            context.user._id,
+            {
+              $push: {
+                skills: {
+                  skill: newSkill._id,
+                  hasSkill,
+                  wantsToLearn,
+                },
+              },
+            },
+            { new: true }
+          ).populate("skills.skill");
+
+          return updatedUser;
+        } catch (error) {
+          console.error("Error adding skill:", error);
         }
-  
-        await Skill.findByIdAndUpdate(
-          skillDoc._id,
-          { $addToSet: { users: context.user._id } }
-        );
-  
-        return updatedUser;
       }
       throw AuthenticationError;
     },
-    removeSkill: async (parent, { skillId }, context) => {
-      if (context.user) {
-        await User.findByIdAndUpdate(
-          context.user._id,
-          { $pull: { skills: skillId } },
-          { new: true }
-        );
+    removeSkill: async (parent, args, context) => {
+      console.log("Arguments received:", args);
+      const { skillId } = args;
 
-        await Skill.findByIdAndUpdate(
-          skillId,
-          { $pull: { users: context.user._id } },
-          { new: true }
-        );
-
-        return User.findById(context.user._id).populate('skills');
+      if (!skillId) {
+        throw new Error("Skill ID is required");
       }
-      throw new AuthenticationError('You must be logged in');
+
+      if (context.user) {
+        try {
+          const updatedUser = await User.findByIdAndUpdate(
+            context.user._id,
+            { $pull: { skills: { skill: skillId } } },
+            { new: true }
+          ).populate("skills.skill");
+
+          await Skill.findByIdAndUpdate(
+            skillId,
+            { $pull: { users: context.user._id } },
+            { new: true }
+          );
+
+          return updatedUser;
+        } catch (error) {
+          console.error("Error removing skill:", error);
+          throw new Error("Error removing skill.");
+        }
+      }
+      throw new AuthenticationError("User not authenticated.");
     },
     sendMessage: async (parent, { receiverId, content }, context) => {
       if (context.user) {

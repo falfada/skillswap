@@ -57,6 +57,7 @@ export default function LoginPage() {
                     type="email"
                     label="Email"
                     name="email"
+                    placeholder="Email"
                     value={loginInfo.email}
                     onChange={handleChange}
                     className="mb-4"
@@ -66,6 +67,7 @@ export default function LoginPage() {
                     type="password"
                     label="Password"
                     name="password"
+                    placeholder="Password"
                     value={loginInfo.password}
                     onChange={handleChange}
                     className="mb-6"
