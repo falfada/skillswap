@@ -24,12 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // static file serving: serves static files from the client/dist directory
-app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Routes for HTML Files:
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
-});
 
 const startApolloServer = async () => {
   await server.start();
