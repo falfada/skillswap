@@ -1,7 +1,15 @@
-const { connect, connection } = require('mongoose');
+// const { connect, connection } = require('mongoose');
 
-const connectionString = 'mongodb+srv://wilson:skills@skillswap.b8eirkl.mongodb.net/';
+// // const connectionString = 'mongodb+srv://wilson:skills@skillswap.b8eirkl.mongodb.net/';
 
-connect(connectionString);
+// mongoose.connect (process.env.MONGODB_URI) = ''
 
-module.exports = connection;
+// connect(connectionString);
+
+// module.exports = connection;
+
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://wilson:skills@skillswap.b8eirkl.mongodb.net/');
+
+module.exports = mongoose.connection;
