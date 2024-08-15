@@ -8,7 +8,7 @@
     "dev": "concurrently \"cd server && npm run watch\" \"cd Client && npm run dev\"",
     "install": "cd server && npm i && cd ../Client && npm i",
     "build": "cd Client && npm run build",
-    "render-build": "npm run build"
+    "render-build": "npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
