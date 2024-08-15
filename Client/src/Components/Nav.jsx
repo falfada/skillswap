@@ -8,7 +8,7 @@ const Nav = () => {
     Auth.logout();
   }
   return (
-    <nav className="flex justify-between items-center p-2 bg-cyan-900">
+    <nav className="w-full flex justify-between items-center p-2 bg-cyan-900">
       
       <Link to="/">
       <img

@@ -33,7 +33,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <section className="h-full bg-gradient-to-r from-cyan-400 to-white flex justify-center items-center">
         <div className="container h-full p-10">
           <div className="flex h-full flex-wrap items-center justify-center text-sky-950">
