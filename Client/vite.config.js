@@ -6,11 +6,11 @@ export default defineConfig({
   plugins: [react()],
   build: { chunkSizeWarningLimit: 1600 },
   server: {
-    port: 3001,
+    port: 5173,
     open: true,
     proxy: {
       '/graphql': {
-        target: ' process.env.VITE_API_URL' || 'http://localhost:3001',
+        target: 'process.env.VITE_API_URL',
         changeOrigin: true,
         secure: false,
       }
